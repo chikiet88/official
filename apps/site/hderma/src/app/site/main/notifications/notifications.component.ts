@@ -5,7 +5,7 @@ import 'moment/locale/vi';
 import { UsersService } from '../../../shared/users.service';
 moment.locale('vi');
 @Component({
-  selector: 'tazagroup-notifications',
+  selector: 'taza-base-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
 })

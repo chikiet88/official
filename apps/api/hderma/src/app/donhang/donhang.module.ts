@@ -7,7 +7,6 @@ import { UsersEntity } from '../users/entities/user.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([DonhangEntity,UsersEntity])],
   controllers: [DonhangController],
-  providers: [DonhangService],
-  exports:[DonhangService]
+  providers: [DonhangService]
 })
 export class DonhangModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, switchMap, take } from 'rxjs';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,8 +19,6 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   postProduct(data: any) {
-    console.log(data);
-
     return this.products$.pipe(
       take(1),
       switchMap((proudcts: any) =>

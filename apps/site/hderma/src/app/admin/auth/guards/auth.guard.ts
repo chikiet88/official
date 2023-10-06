@@ -21,8 +21,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    const redirectUrl = state.url === '/dangxuat' ? '/' : state.url;
-    return this._check(redirectUrl);
+    const redirectURL = state.url === '/dangxuat' ? '/' : state.url;
+    return this._check(redirectURL);
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -32,9 +32,9 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const redirectUrl = state.url === '/dangxuat' ? '/' : state.url;
+    const redirectURL = state.url === '/dangxuat' ? '/' : state.url;
 
-    return this._check(redirectUrl);
+    return this._check(redirectURL);
   }
   canLoad(
     route: Route,

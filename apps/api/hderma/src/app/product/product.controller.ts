@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -17,30 +17,14 @@ export class ProductController {
     return this.productService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.productService.findOne(id);
-  // }
-  @Get('search')
-  searchBooks(@Query('query') query: string) {
-    return this.productService.searchproduct(query);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.productService.findOne(id);
   }
-  @Get('pagina')
-  findPagina(@Query('page') page: number, @Query('limit') limit: number) {
-    return this.productService.findPagina(page,limit);
+  @Post('findid')
+  findid(@Body() data: any) {  
+    return this.productService.findid(data);
   }
-  @Get('findslug/:slug')
-  findslug(@Param('slug') slug: string) {
-    return this.productService.findslug(slug);
-  }
-  @Get('findid/:id')
-  findid(@Param('id') id: any) {    
-    return this.productService.findid(id);
-  }
-  // @Post('findid')
-  // findid(@Body() data: any) {  
-  //   return this.productService.findid(data);
-  // }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productService.update(id, updateProductDto);

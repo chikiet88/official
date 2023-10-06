@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { NotifierService } from 'angular-notifier';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
+import { LocalStorageService } from './localstorage.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,7 @@ export class ApinhanhService {
   constructor(
     private _httpClient: HttpClient,
     private _NotifierService: NotifierService,
+    private _LocalStorageService: LocalStorageService,
     ) { }
   get sanphams$(): Observable<any[]> {
     return this._sanphams.asObservable();
@@ -26,7 +28,7 @@ export class ApinhanhService {
             if(response.code!=0)
             {
                 const token = JSON.stringify({nhanhToken: response.accessToken, businessId: response.businessId});
-                localStorage.setItem('nhanhApi', token);
+                this._LocalStorageService.setItem('nhanhApi', token);
                 this._NotifierService.notify("success","Kết Nối Thành Công")
             }
             else {

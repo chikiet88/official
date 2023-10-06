@@ -22,13 +22,6 @@ import { NotifyTokkenModule } from './notify_tokken/notify_tokken.module';
 import { CustomerChiendichModule } from './customer_chiendich/customer_chiendich.module';
 import { ApinhanhModule } from './apinhanh/apinhanh.module';
 import { VnpayModule } from './vnpay/vnpay.module';
-import { ThongtinchungModule } from './routine/thongtinchung/thongtinchung.module';
-import { UploadModule } from './upload/upload.module';
-import { PhanloaidaModule } from './routine/phanloaida/phanloaida.module';
-import { TinhtrangdaModule } from './routine/tinhtrangda/tinhtrangda.module';
-import { CombosanphamModule } from './routine/combosanpham/combosanpham.module';
-import { KetquaModule } from './routine/ketqua/ketqua.module';
-import { NhomroutineModule } from './routine/nhomroutine/nhomroutine.module';
 
 @Module({
   controllers: [],
@@ -57,14 +50,7 @@ import { NhomroutineModule } from './routine/nhomroutine/nhomroutine.module';
     NotifyTokkenModule,
     CustomerChiendichModule,
     ApinhanhModule,
-    VnpayModule,
-    ThongtinchungModule,
-    UploadModule,
-    PhanloaidaModule,
-    TinhtrangdaModule,
-    CombosanphamModule,
-    KetquaModule,
-    NhomroutineModule
+    VnpayModule
   ],
 })
 export class Hdermav2ApiModule { }

@@ -1,78 +1,74 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from './cart.service';
 import { NotifierService } from 'angular-notifier';
-import { FormControl, Validators } from '@angular/forms';
-import { isNull } from 'lodash-es';
+import { MainComponent } from '../main/main.component';
+import { GetImage } from '../../shared/shared.utils';
+import { GiohangService } from '../../shared/giohang.service';
 
 @Component({
-  selector: 'tazagroup-cart',
+  selector: 'taza-base-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
   @Input() isShowCart!: boolean;
   product!: any;
-  num: number = 0;
-  amount: number = 0;
+  soluong: number = 0;
+  total: number = 0;
   carts: any[] = [];
   constructor(
-    private _cartService: CartService,
+    private _cartService: GiohangService,
     private _router: Router,
     private _notifierService: NotifierService,
+    private _MainComponent: MainComponent,
 
-    ) { }
+
+  ) { }
   removeItem(item: any) {
-    this._cartService.removeCart(item).subscribe()
+    this._cartService.removeFromCart(item)
   }
   onKeyDown(event: KeyboardEvent): void {
-    const allowedKeys = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9','Backspace'];
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace'];
     if (!allowedKeys.includes(event.key)) {
       event.preventDefault();
     }
   }
-  onBlur(i:any)
-  {
-      if(this.carts[i].cartNum==null || this.carts[i].cartNum==0)
-      {
-        this.carts[i].cartNum =1;
-      }
-}
+  onBlur(i: any) {
+    if (this.carts[i].soluong == null || this.carts[i].soluong == 0) {
+      this.carts[i].soluong = 1;
+    }
+  }
   ngOnInit(): void {
-    this._cartService.getCart().subscribe();
+    this._cartService.getCarts()
     this._cartService.carts$.subscribe((res) => {
       if (res) {
-        this.carts = res;
-        // console.log(this.carts);
+        this.carts = res; 
+        this.total = this.carts.reduce((total, item) => total + (item.Gia * item.soluong), 0);
       }
     });
-    this._cartService.num$.subscribe((res) => {
-      this.num = res;
-    });
-    this._cartService.amount$.subscribe((res) => {
-      this.amount = res;
-    });
   }
-  Total(items:any)
-  {
-    return items.reduce((acc:any, item:any) => acc + item.cartNum * item.Gia, 0)
+  DrawToggle() {
+    this._MainComponent.Cartdrawer.close();
   }
-  DrawToggle()
-  {
-    this._cartService.toggleCart();
-  }
-  Dathang()
-  {
-    this._cartService.toggleCart();
+  Dathang() {
+    this._MainComponent.Cartdrawer.close();
     this._router.navigate(['checkout']);
   }
-  updateCart(item:any,cartNum:any)
+  updateCart(item: any, soluong: number) {
+    console.log(soluong);
+    if (soluong > 0) {
+      this._cartService.updateQuantity(item, soluong)
+    }
+  }
+  RemoveCarts()
   {
-    if(cartNum>0)
-    {
-    this._cartService.pushQuantityCart(item, cartNum).subscribe((res) =>
-    this._notifierService.notify('success','Cập nhật giỏ hàng thành công')
-    );
+    this._cartService.EmptyCart();
+  }
+  GetImage(data: any){
+    if (data && data.Hinhanh) {
+      return GetImage(data.Hinhanh);
+    } else {
+      return "assets/images/logo.svg";
     }
   }
 }

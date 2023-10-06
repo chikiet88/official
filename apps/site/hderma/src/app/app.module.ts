@@ -1,14 +1,12 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '@taza-base/environments';
-import { DangnhapComponent } from './dangnhap/dangnhap.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SoonComponent } from './soon/soon.component';
 import { GioithieuComponent } from './gioithieu/gioithieu.component';
@@ -18,18 +16,15 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete'; 
-import { Hdermav2SiteModule } from './hdermav2-site.module';
 import { MaterialModule } from './shared/material.module';
-const routerConfig: ExtraOptions = {
-  preloadingStrategy: PreloadAllModules,
-  scrollPositionRestoration: 'enabled',
-};
+import { environment } from 'apps/site/hderma/src/environments/environments';
+import { Hdermav2SiteModule } from './hdermav2-site.module';
+import { MyErrorHandler } from './app-error-handler';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
     NxWelcomeComponent,
-    DangnhapComponent,
     DashboardComponent,
     SoonComponent,
     GioithieuComponent,
@@ -43,7 +38,7 @@ const routerConfig: ExtraOptions = {
     GoogleChartsModule,
     MaterialModule,
     NotifierModule,
-    NotifierModule.withConfig( {
+    NotifierModule.withConfig({
       position: {
         horizontal: {
           position: 'right',
@@ -83,22 +78,27 @@ const routerConfig: ExtraOptions = {
         overlap: 150,
       },
     }),
-    RouterModule.forRoot([
-      // {path: '404-not-found', pathMatch: 'full', component: Loi404Component},
-      // {path: '**', redirectTo: '404-not-found'},
-    ], routerConfig),
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    Hdermav2SiteModule,
-    //SharedModule,
-    HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: false,
-      registrationStrategy: 'registerWhenStable:30000',
+    RouterModule.forRoot([],{
+      preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: 'enabled',
+      initialNavigation: 'enabledBlocking',
+      relativeLinkResolution: 'legacy'
     }),
-    GooglePlaceModule
+  BrowserAnimationsModule,
+  FormsModule,
+  NgxSpinnerModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  Hdermav2SiteModule,
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: false,
+    registrationStrategy: 'registerWhenStable:30000',
+  })
+  ],
+  providers: [
+    // {provide: ErrorHandler, useClass: MyErrorHandler},
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+
+export class AppModule { }

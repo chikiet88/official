@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { Role } from '../dto/create-user.dto';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma_users', {database:environment.DB_HDERMA.database, orderBy: { Ngaytao: 'DESC' } })
 export class UsersEntity {
     @PrimaryGeneratedColumn("uuid")
@@ -20,8 +20,6 @@ export class UsersEntity {
     Hoten: string;
     @Column({collation: "utf8_general_ci"})
     email: string;
-    @Column({ type: "text", collation: "utf8_general_ci" })
-    Gioitinh: string;
     @Column({collation: "utf8_general_ci",type:"simple-json",default: () => "('[]')" })
     Diachi: string;
     @Column()

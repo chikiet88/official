@@ -22,7 +22,7 @@ export class DonhangController {
   // }
   @Get('madonhang/:id')
   async endpointHandler(@Param('id') id: string) {
-    return this.donhangService.findByMaDH(id);
+    console.error(id);
   }
   @Get(':id')
   findOne(@Param('id') id: string) {

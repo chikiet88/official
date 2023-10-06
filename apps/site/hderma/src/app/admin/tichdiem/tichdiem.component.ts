@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-tichdiem',
+  selector: 'taza-base-tichdiem',
   templateUrl: './tichdiem.component.html',
   styleUrls: ['./tichdiem.component.scss'],
 })

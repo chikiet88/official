@@ -1,4 +1,4 @@
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import {
     Entity,
     Column,

@@ -91,10 +91,10 @@
             >
               <td class="py-2 px-2 text-gray-500">
                 {{ item.Tieude }} |
-                {{ item.cartNum ? "Số lượng: " + item.cartNum : "" }}
+                {{ item.soluong ? "Số lượng: " + item.soluong : "" }}
               </td>
               <td class="py-2 px-2">
-                {{ item.GiaSale * item.cartNum | currency: "VND" }}
+                {{ item.GiaSale * item.soluong | currency: "VND" }}
               </td>
             </tr>
             <tr class="border-b border-gray-200 px-2">
@@ -103,11 +103,11 @@
             </tr>
             <tr class="border-b border-gray-200 px-2">
               <td class="py-2 px-2 text-purple-500 font-bold">Tổng cộng</td>
-              <td class="py-2 px-2">{{ amount | currency: "VND" }}</td>
+              <td class="py-2 px-2">{{ total | currency: "VND" }}</td>
             </tr>
             <!-- <tr class="border-b border-gray-200 px-2">
               <td class="py-2 px-2 text-purple-500 font-bold">Total</td>
-              <td class="py-2 px-2">{{ amount | currency: "VND" }}</td>
+              <td class="py-2 px-2">{{ total | currency: "VND" }}</td>
             </tr> -->
           </tbody>
         </table>

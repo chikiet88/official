@@ -43,19 +43,6 @@ export class DonhangService {
     });
     return donhangkh
   }
-  async findByMaDH(MaDH: string) {
-    const donhangkh = await this.DonhangRepository.findOne({
-      where: { MaDonHang: MaDH },
-      relations: ['Donhangchitiets', 'Donhangchitiets.Product']
-    });
-    return donhangkh
-  }
-  async findVNPAY(MaDH: string) {
-    const donhangkh = await this.DonhangRepository.findOne({
-      where: { MaDonHang: MaDH }
-    });
-    return donhangkh
-  }
   // async findByModule(id: string) {
   //   return await this.DonhangRepository.find({ where: { Module: id } });
   // }

@@ -1,36 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../../shared/material.module';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { SwiperModule } from 'swiper/angular';
-import { BlogDanhmucComponent } from './blog-danhmuc/blog-danhmuc.component';
 import { BlogComponent } from './blog.component';
-import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BlogchitietComponent } from './blogchitiet/blogchitiet.component';
+import { BloglistComponent } from './bloglist/bloglist.component';
+// import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { SwiperModule } from 'swiper/angular';
+import { MaterialModule } from '../../shared/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,
-    MaterialModule,
-    ReactiveFormsModule,
     SwiperModule,
-    EditorModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    // PaginationModule.forRoot(),
     RouterModule.forChild([
-      {
-        path: '',
-        component: BlogComponent,
-      },
-      { path: 'danh-muc', component: BlogDanhmucComponent },
-      { path: ':slug', component: BlogDetailComponent }
-    ]),
+      { path: '', component: BloglistComponent },
+      { path: ':slug', component: BlogchitietComponent },
+    ])
   ],
-  exports: [RouterModule],
-  declarations: [BlogComponent, BlogDanhmucComponent, BlogDetailComponent],
-
-
+  declarations: [BlogComponent,BloglistComponent,BlogchitietComponent]
 })
 export class BlogModule { }

@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { TimonaApiModule } from './timona-api.module';
 import { HttpModule } from "@nestjs/axios";
 @Module({

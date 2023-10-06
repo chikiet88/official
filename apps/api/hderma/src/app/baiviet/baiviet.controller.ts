@@ -16,10 +16,6 @@ export class BaivietController {
   findAll() {
     return this.baivietService.findAll();
   }
-  @Get('search')
-  searchBooks(@Query('query') query: string) {
-    return this.baivietService.searchbaiviet(query);
-  }
   @Get('pagina')
   findPagina(@Query('page') page: number, @Query('limit') limit: number) {
     console.error();

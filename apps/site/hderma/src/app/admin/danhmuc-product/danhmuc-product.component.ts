@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DanhmucProductService } from './danhmuc-product.service';
 
 @Component({
-  selector: 'tazagroup-danhmuc-product',
+  selector: 'taza-base-danhmuc-product',
   templateUrl: './danhmuc-product.component.html',
   styleUrls: ['./danhmuc-product.component.scss'],
 })

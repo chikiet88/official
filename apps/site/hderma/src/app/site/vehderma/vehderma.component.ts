@@ -3,7 +3,7 @@ import { SwiperOptions } from 'swiper';
 
 import * as AOS from 'aos';
 @Component({
-  selector: 'tazagroup-vehderma',
+  selector: 'taza-base-vehderma',
   templateUrl: './vehderma.component.html',
   styleUrls: ['./vehderma.component.scss'],
 })

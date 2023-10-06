@@ -4,7 +4,7 @@
 // import { NotifierService } from 'angular-notifier';
 // import { SanphamService } from '../sanpham.service';
 // @Component({
-//   selector: 'tazagroup-detaildanhmuc',
+//   selector: 'taza-base-detaildanhmuc',
 //   templateUrl: './detaildanhmuc.component.html',
 //   styleUrls: ['./detaildanhmuc.component.scss'],
 // })

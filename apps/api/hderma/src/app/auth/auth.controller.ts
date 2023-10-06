@@ -1,6 +1,7 @@
 import { Controller, Get, Post,Request, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './entities/jwt-auth.guard';
 import { AuthGuard } from '@nestjs/passport';
 @Controller('hderma_auth')
 export class AuthController {
@@ -23,7 +24,7 @@ export class AuthController {
   @Get('profile')
   @UseGuards(AuthGuard('hderma'))
   async getProfile(@Request() req) {
-    const user = await this.usersService.findbySDT(req.user);    
+    const user = await this.usersService.findbySDT(req.user);
     if(user)
     {     
       delete user.password;

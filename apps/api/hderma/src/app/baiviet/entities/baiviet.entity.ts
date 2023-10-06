@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { DanhmucEntity } from '../../danhmuc/entities/danhmuc.entity';
 import { TagEntity } from '../../tags/entities/tag.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma-baiviet', {database:environment.DB_HDERMA.database, orderBy: { CreateAt: 'DESC' }})
 export class BaivietEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -43,8 +43,6 @@ export class BaivietEntity {
     Theme: number;
     @Column({ default: '' })
     pid: string;
-    @Column({ default: '' })
-    idDM: string;
     @Column({ default: 0 })
     Loaibaiviet: number;
     @Column({ type: 'text', collation: 'utf8_general_ci', default:'' })

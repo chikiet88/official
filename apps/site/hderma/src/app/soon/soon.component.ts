@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-soon',
+  selector: 'taza-base-soon',
   templateUrl: './soon.component.html',
   styleUrls: ['./soon.component.scss'],
 })

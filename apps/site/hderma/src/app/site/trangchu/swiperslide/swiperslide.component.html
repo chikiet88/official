@@ -1,0 +1,24 @@
+<swiper [config]="config" class="mySwiper lg:!pb-12 !pb-8">
+  <ng-template swiperSlide  *ngFor="let item of data">
+    <div class="w-full h-full flex flex-col space-y-4 justify-center items-center font-semibold text-center">
+      <a [href]="'/san-pham/'+item.Slug" class="w-full h-full flex flex-col space-y-4 justify-center items-center">
+        <img [src]="GetImage(item)" alt="">
+        <span class="line-clamp-2 px-4"> {{item.Tieude}}</span>
+      </a>
+      <div class="flex flex-row space-x-3 items-center">
+        <span class="text-red-500 text-lg">{{item.GiaSale|number:'1.0-2'}}đ</span>
+        <span class="line-through" *ngIf="(item.Gia-item.GiaSale)>0">{{item.GiaSale|number:'1.0-2'}}đ</span>
+        <button (click)="addtocart(item)" mat-icon-button class="bg-black text-white">      
+         <span class="material-symbols-outlined">shopping_cart</span>
+        </button>
+      </div>
+      <!-- <div>
+        <button (click)="addtocart(item)" type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+          <span class="material-symbols-outlined">
+          shopping_cart
+          </span>
+        </button>
+      </div> -->
+    </div>
+  </ng-template>
+</swiper>

@@ -1,4 +1,4 @@
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 @Entity('hderma_customer_diem', {
   database:environment.DB_HDERMA.database,

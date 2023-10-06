@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable()
 export class AccountNotificationsService {

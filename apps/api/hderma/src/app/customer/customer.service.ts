@@ -43,19 +43,19 @@ export class CustomerService {
       donhang: donhangMap.get(item.idDonHang)
     }));
 
-    // const Hoahong = await this.CauhinhHoahongRepository.findOne(
-    //    {where: {
-    //        doanhthutu: LessThan(Tongdiem.TongDiemcap*10000), 
-    //        doanhthuden: MoreThan(Tongdiem.TongDiemcap*10000),
-    //     }}
-    //   );
-    // const result = {TongDiemCap:Tongdiem.TongDiemcap,TongDiemqua:Tongdiem.TongDiemqua,ChiTiet:mappedArray,Hoahong:Hoahong}
+    const Hoahong = await this.CauhinhHoahongRepository.findOne(
+       {where: {
+           doanhthutu: LessThan(Tongdiem.TongDiemcap*10000), 
+           doanhthuden: MoreThan(Tongdiem.TongDiemcap*10000),
+        }}
+      );
+    const result = {TongDiemCap:Tongdiem.TongDiemcap,TongDiemqua:Tongdiem.TongDiemqua,ChiTiet:mappedArray,Hoahong:Hoahong}
 
     // this.Hoahongs = data4
     // this.Level = data4.find(v=>this.Tichdiem.TongDiemcap*10000>=v.doanhthutu &&  this.Tichdiem.TongDiemcap*10000<  v.doanhthuden)
     // this.value = (this.Tichdiem.TongDiemcap/(this.Level.doanhthuden/10000))*100
-    //return result
-    return 'result'
+
+    return result
   }
   async findByidUser(id: string) {
     const User = await this.CustomerRepository.findOne({ where: { idUser: id } });

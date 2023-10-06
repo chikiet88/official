@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { DonhangEntity } from '../../donhang/entities/donhang.entity';
 import { ProductEntity } from '../../product/entities/product.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma-donhangchitiet', {database:environment.DB_HDERMA.database,
     orderBy: {
         Ngaytao: "DESC",

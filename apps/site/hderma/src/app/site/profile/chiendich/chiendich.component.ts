@@ -6,7 +6,7 @@ import { DonhangService } from '../../../admin/donhang/donhang.service';
 import { UsersService } from '../../../shared/users.service';
 
 @Component({
-  selector: 'tazagroup-chiendich',
+  selector: 'taza-base-chiendich',
   templateUrl: './chiendich.component.html',
   styleUrls: ['./chiendich.component.scss'],
 })
@@ -25,23 +25,19 @@ export class ChiendichComponent implements OnInit {
     this._chiendichService.chiendichs$.subscribe((data: any) => {
       if (data) {
         this.chiendichs = data
-        console.log(data);
       }
     })
     this._usersService.getProfile().subscribe();
     this._usersService.profile$.subscribe(user => {
       if (user) {
         this.user = user;
-        this._DonhangService.getDonhangByidKH(this.user.id).subscribe((data)=>{console.log(data);
-        })
+        this._DonhangService.getDonhangByidKH(this.user.id).subscribe()
       }
       }
     )
 
   }
   AddCustomChiendich(data: any) {
-    console.log(this.user);
-    console.log(data);
     const dulieu = { idUser: this.user.id, idCD: data.id }
     this._CustomerchiendichService.createCustomerchiendich(dulieu).subscribe()
   }

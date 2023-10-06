@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApinhanhService } from '../../../shared/apinhanh.service';
 import { CauhinhchungService } from '../../../shared/cauhinhchung.service';
+import { LocalStorageService } from '../../../shared/localstorage.service';
 @Component({
-  selector: 'tazagroup-dashboard',
+  selector: 'taza-base-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  nhanhApi = localStorage.getItem('nhanhApi') || null;
+  nhanhApi = this._LocalStorageService.getItem('nhanhApi') || null;
   accessCode:any
   apifield:any ={url:"",version: "2.0",appId: "",accessCode: "",secretKey: ""}
   MenuDashboard: any[] = [
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private _ApinhanhService: ApinhanhService,
     private _CauhinhchungService: CauhinhchungService,
+    private _LocalStorageService: LocalStorageService,
   ) { }
   ngOnInit(): void {
     this._CauhinhchungService.getAll().subscribe((data:any)=>
@@ -45,7 +47,7 @@ export class DashboardComponent implements OnInit {
   }
   Disconect()
   {
-    localStorage.removeItem('nhanhApi');
+    this._LocalStorageService.removeItem('nhanhApi');
       this._router.navigate(['admin']);
       location.reload();
   }

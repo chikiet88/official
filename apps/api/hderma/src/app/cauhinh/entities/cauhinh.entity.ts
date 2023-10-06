@@ -1,4 +1,4 @@
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, Index, CreateDateColumn, Generated, ManyToOne, OneToMany, Tree, TreeChildren, TreeParent } from 'typeorm';
 @Entity('hderma-cauhinh', {database:environment.DB_HDERMA.database,
     orderBy: { Ngaytao: "DESC" }
@@ -12,10 +12,8 @@ export class CauhinhEntity {
     Slug: string;
     @Column({ type: "longtext", collation: "utf8_general_ci" })
     Mota: string;
-    @Column({ type: "longtext", collation: "utf8_general_ci" })
-    Content: string;
     @Column({ collation: "utf8_general_ci", type: "simple-json", default: () => "('{}')" })
-    Data: string;
+    Content: string;
     @Column({ collation: "utf8_general_ci" })
     Branch: string;
     @Column({ default: 1 })

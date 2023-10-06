@@ -7,21 +7,20 @@
       <mat-divider></mat-divider>
       <div class="h-full overflow-auto pb-5">
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="adminmenu">
-          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding routerLink="{{ node.Link }}"
-            routerLinkActive="bg-gray-200">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding routerLinkActive="bg-gray-200">
             <div class="px-4 flex flex-row space-x-2 items-center">
-              <span class="material-icons" *ngIf="node.level==0"> widgets </span>
-              <span class="cursor-pointer">
+              <span class="material-symbols-outlined" *ngIf="node.level==0"> widgets </span>
+              <a routerLink="{{ node.Link }}" class="cursor-pointer">
                 {{node.name}}
-              </span>
+              </a>
             </div>
           </mat-tree-node>
           <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
             <div class="px-4 flex flex-row space-x-2 items-center justify-center">
-            <span class="material-icons" *ngIf="node.level==0"> widgets </span>
-            <span class="cursor-pointer" routerLink="{{ node.Link }}">
+            <span class="material-symbols-outlined" *ngIf="node.level==0"> widgets </span>
+            <a class="cursor-pointer" routerLink="{{ node.Link }}">
               {{node.name}}
-            </span>
+            </a>
             <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" role="group">
               <mat-icon class="mat-icon-rtl-mirror">
                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
@@ -34,28 +33,27 @@
       <div
       class="relative flex flex-0 items-center justify-between w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
       <div class="flex flex-row space-x-3">
-      <span class="font-medium text-secondary">Tazagroup © 2023</span>
-          <span class="material-icons">settings</span>
-          <span class="material-icons">logout</span>
+      <span class="font-medium text-secondary">Taza-base © 2023</span>
+          <span class="material-symbols-outlined">settings</span>
+          <span class="material-symbols-outlined">logout</span>
         </div>
-
     </div>
     </div>
   </mat-drawer>
   <mat-drawer-content class="!flex flex-col flex-auto min-w-0 relative">
-    <div class="relative items-center flex flex-row justify-between shadow bg-white py-2 border-b-2">
+    <div class="relative items-center flex flex-row justify-between shadow bg-white py-2 border-b">
       <div class="flex flex-row space-x-2">
         <button type="button" mat-icon-button (click)="drawer.toggle()">
-          <span class="material-icons">
+          <span class="material-symbols-outlined">
             menu
           </span>
         </button>
       </div>
       <div class="flex flex-row items-center justify-center space-x-2 px-4">
-        <span class="material-icons" [matMenuTriggerFor]="menu">
+        <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">
           account_circle
         </span>
-          <a href="/" target="_blank"><span class="material-icons">launch</span></a>
+          <a href="/" target="_blank"><span class="material-symbols-outlined">launch</span></a>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
             PHẠM CHÍ KIỆT
@@ -64,7 +62,7 @@
           <hr>
           <button mat-menu-item [routerLink]="['/profile']">
             <div class="flex flex-row space-x-2 items-center">
-              <span class="material-icons">
+              <span class="material-symbols-outlined">
                 account_circle
               </span>
               <span>Thông Tin</span>
@@ -73,7 +71,7 @@
           <hr>
           <button mat-menu-item [routerLink]="['/profile/datlaimatkhau']">
             <div class="flex flex-row space-x-2 items-center">
-              <span class="material-icons">
+              <span class="material-symbols-outlined">
                 vpn_key
               </span>
               <span>Đổi Mật Khẩu</span>
@@ -82,7 +80,7 @@
           <hr>
           <button mat-menu-item (click)="Dangxuat()">
             <div class="flex flex-row space-x-2 items-center">
-              <span class="material-icons">
+              <span class="material-symbols-outlined">
                 logout
               </span>
               <span> Đăng xuất</span>

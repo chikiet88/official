@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 
 
 // @Component({
-//   selector: 'tazagroup-tichdiem',
+//   selector: 'taza-base-tichdiem',
 //   templateUrl: './tichdiem.component.html',
 //   styleUrls: ['./tichdiem.component.scss'],
 // })
@@ -48,13 +48,11 @@ export class TichdiemComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  getTichdiem
   ngOnInit(): void {
     this._usersService.getProfile().subscribe();
     this._usersService.profile$.subscribe((data) => {
       if(data)
       {
-        console.log(data);
         
         this._tichdiemService.getByid(data.id).subscribe(()=>
         {
@@ -62,7 +60,6 @@ export class TichdiemComponent implements OnInit {
           {
             if(data2)
             {
-            console.log(data2);
             this.ListTichdiem = data2;
             this.dataSource = new MatTableDataSource(this.ListTichdiem.Diem);
             this.dataSource.paginator = this.paginator;
@@ -75,7 +72,6 @@ export class TichdiemComponent implements OnInit {
           this._tichdiemService.customer$.subscribe((data3)=>{
             if(data3)
             {
-              console.log(data3);
               this.Tichdiem = data3;
             }
             this._hoahongService.getAll().subscribe(()=>
@@ -84,7 +80,6 @@ export class TichdiemComponent implements OnInit {
               {
                 if(data4)
                 {
-                  console.log(data4);
                   this.Hoahongs = data4
                   this.Level = data4.find(v=>this.Tichdiem.TongDiemcap*10000>=v.doanhthutu &&  this.Tichdiem.TongDiemcap*10000<  v.doanhthuden)
                   this.value = (this.Tichdiem.TongDiemcap/(this.Level.doanhthuden/10000))*100

@@ -45,7 +45,7 @@ export class GuestGuard implements CanActivate {
     return this._authService.checkDangnhap().pipe(
       switchMap((authenticated) => {
         if (authenticated) {
-          this._notifierService.notify('error','Đang Đăng Nhập Tài Khoản')
+          //this._notifierService.notify('error','Đang Đăng Nhập Tài Khoản')
           this._router.navigate(['']);
           return of(false);
         }

@@ -9,7 +9,7 @@ import { ChiendichService } from './chiendich.service';
 import { SanphamService } from '../../sanpham/sanpham.service';
 import { Observable, map, startWith } from 'rxjs';
 @Component({
-  selector: 'tazagroup-chiendich',
+  selector: 'taza-base-chiendich',
   templateUrl: './chiendich.component.html',
   styleUrls: ['./chiendich.component.scss'],
 })

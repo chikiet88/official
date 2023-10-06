@@ -5,71 +5,79 @@
         </div>
     </mat-drawer>
     <mat-drawer-content class="!flex flex-col flex-auto min-w-0 relative bg-white !h-[90vh]">
-        <div class="relative border-b-2 flex flex-col">
-          <div class="flex flex-col p-3 items-center justify-between w-full">
-              <mat-form-field appearance="outline" class="w-full text-xs">
-                  <mat-label>Tiêu Đề</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Mô Tả">
-                  <span matPrefix class="material-icons mr-2">search</span>
-              </mat-form-field>
-              <div class="flex flex-row space-x-3 justify-start w-full">
-                    <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-                        <span class="material-icons text-xl"
-                            matTooltip="Tùy Chỉnh">tune</span>
+        <div class="relative border-b flex flex-col">
+            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 p-3 w-full">
+                <mat-form-field appearance="outline" class="w-full text-xs">
+                    <mat-label>Tiêu Đề</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" class="w-full" placeholder="Mô Tả">
+                    <span matPrefix class="material-symbols-outlined mr-2">search</span>
+                </mat-form-field>
+                <div class="flex flex-row space-x-3 lg:justify-center justify-between w-full">
+                    <div class="flex lg:flex-row flex-col lg:space-x-2 items-center justify-center px-2 hover:bg-gray-200 rounded-lg"
+                    (click)="CreateDialog(dialogDanhmuc)">
+                    <span class="material-symbols-outlined text-xl" matTooltip="Tạo mới">add_circle</span>
+                    <span class="text-sm">Thêm</span>
+                </div>
+                    <div
+                        class="flex lg:flex-row flex-col lg:space-x-2 items-center justify-center p-2 hover:bg-gray-200 rounded-lg">
+                        <span class="material-symbols-outlined text-xl" matTooltip="Tùy Chỉnh">tune</span>
                         <span class="text-sm">Cấu Hình</span>
                     </div>
-                    <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg">
-                        <span class="material-icons text-xl"
-                            matTooltip="Lấy Mẫu">file_download</span>
+                    <div
+                        class="flex lg:flex-row flex-col lg:space-x-2 items-center justify-center p-2 hover:bg-gray-200 rounded-lg">
+                        <span class="material-symbols-outlined text-xl" matTooltip="Lấy Mẫu" (click)="openDialog(dlImportDanhmuc)">file_download</span>
                         <span class="text-sm">Download</span>
                     </div>
-                    <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg" (click)="openDialog(dlImportDanhmuc)">
-                        <span class="material-icons text-xl"
-                            matTooltip="Upload File">file_upload</span>
+                    <div
+                        class="flex lg:flex-row flex-col lg:space-x-2 items-center justify-center p-2 hover:bg-gray-200 rounded-lg">
+                        <span class="material-symbols-outlined text-xl" matTooltip="Upload File">file_upload</span>
                         <span class="text-sm">Upload</span>
                     </div>
-                    <div class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg" (click)="openDialog(dialogDanhmuc)">
-                        <span class="material-icons text-xl"
-                            matTooltip="Tạo mới">add_circle</span>
-                        <span class="text-sm">Thêm</span>
-                    </div>
-              </div>
-          </div>
+                </div>
+            </div>    
         </div>
         <div class="relative flex flex-col h-full w-full overflow-auto">
           <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                <div class="flex items-center justify-between space-x-4 cursor-pointer w-full px-3 py-1 group">
-                    <div class="flex items-center space-x-2" *ngIf="node.isDM" (click)="drawer.open()" routerLink="danhmuc/{{node.id}}">
-                        <span class="material-icons text-yellow-500"> collections_bookmark </span>
-                        <span class="">{{ node.Title }}</span>
-                    </div>
-                    <div class="flex items-center space-x-2" (click)="drawer.open()" routerLink="baiviet/{{node.id}}"
-                        *ngIf="!node.isDM">
-                        <!-- <span class="material-icons text-blue-500"> menu_book </span> -->
+                <ng-container *ngIf="node.isDM; else elseTemplate">
+                    <a *ngIf="node.isDM" (click)="drawer.open()" routerLink="danhmuc/{{node.id}}" class="flex items-center justify-between space-x-4 cursor-pointer w-full px-3 py-1 group rounded-lg hover:bg-gray-200">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-symbols-outlined text-yellow-500"> folder </span>
+                            <span class="">{{ node.Title }}</span>
+                        </div>
+                        <div class="items-center space-x-2" *ngIf="node.isDM">
+                            <span class="material-symbols-outlined cursor-pointer text-green-500" (click)="openDialog(dialogBaiviet);BVDetail.pid=node.id">
+                                note_add
+                            </span>
+                            <span class="material-symbols-outlined cursor-pointer text-red-500" title="Xoá" (click)="DLDeleteDanhmuc(dialogXoaDanhmuc,node)">
+                            delete
+                            </span>
+                        </div>
+                    </a>
+
+                </ng-container>
+                <ng-template #elseTemplate>
+                <a  (click)="drawer.open()" routerLink="baiviet/{{node.id}}" class="flex items-center justify-between space-x-4 cursor-pointer w-full px-3 py-1 group rounded-lg hover:bg-gray-200">
+                    <div class="flex items-center space-x-2">
                         <img [src]="GetImage(node.Hinhanh.hinhchinh?node.Hinhanh.hinhchinh.spath:'')" width="50px" class="rounded" />
                         <div>{{node.Title}}</div>
                     </div>
-                    <div class="items-center space-x-2" *ngIf="node.isDM">
-                        <span class="material-icons cursor-pointer text-green-500" (click)="openDialog(dialogBaiviet);BVDetail.pid=node.id">
-                            note_add
-                        </span>
-                        <span class="material-icons cursor-pointer text-red-500" title="Xoá" (click)="DLDeleteDanhmuc(dialogXoaDanhmuc,node)">
-                        delete
-                        </span>
-                    </div>
-                    <div class="items-center space-x-2" *ngIf="!node.isDM">
+                    <div class="items-center space-x-2">
                         <ng-container *ngIf="node.Trangthai; else elseTemplate1">
-                            <span class="material-icons cursor-pointer text-green-500">visibility</span>
+                            <span class="material-symbols-outlined cursor-pointer text-green-500">visibility</span>
                         </ng-container>
                         <ng-template #elseTemplate1>
-                            <span class="material-icons cursor-pointer text-blue-500">visibility_off</span>
+                            <span class="material-symbols-outlined cursor-pointer text-blue-500">visibility_off</span>
                         </ng-template>
-                        <span class="material-icons cursor-pointer text-red-500" title="Xoá" (click)="DLDeleteBaivet(dialogXoaBaiviet,node)">
+                        <span class="material-symbols-outlined cursor-pointer text-red-500" title="Xoá" (click)="DLDeleteBaivet(dialogXoaBaiviet,node)">
                             delete
                         </span>
                     </div>
-                </div>
+                </a>
+                </ng-template>
+                
+
+
             </mat-tree-node>
             <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
                 <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.Title">
@@ -79,16 +87,16 @@
                 </button>
                 <div
                     class="flex items-center space-x-4 justify-between cursor-pointer w-full group hover:bg-gray-200 px-3 py-1 rounded">
-                    <div class="flex items-center space-x-2" (click)="drawer.open()" *ngIf="node.isDM" routerLink="danhmuc/{{node.id}}">
-                        <span class="material-icons text-yellow-500"> collections_bookmark </span>
+                    <a class="flex items-center space-x-2" (click)="drawer.open()" *ngIf="node.isDM" routerLink="danhmuc/{{node.id}}">
+                        <span class="material-symbols-outlined text-yellow-500">  {{treeControl.isExpanded(node) ? 'folder_open' : 'folder'}} </span>
                         <span class="">{{ node.Title }} </span>
-                    </div>
+                    </a>
                     <ng-container *ngIf="node.isDM; else elseTemplate">
                         <div class="flex flex-row space-x-2 items-center">
-                            <span class="material-icons cursor-pointer text-green-500" (click)="openDialog(dialogBaiviet);BVDetail.pid=node.id">
+                            <span class="material-symbols-outlined cursor-pointer text-green-500" (click)="openDialog(dialogBaiviet);BVDetail.pid=node.id">
                                 note_add
                             </span>
-                            <span class="material-icons cursor-pointer text-red-500" (click)="DLDeleteDanhmuc(dialogXoaDanhmuc,node)">
+                            <span class="material-symbols-outlined cursor-pointer text-red-500" (click)="DLDeleteDanhmuc(dialogXoaDanhmuc,node)">
                                 delete
                             </span>
                         </div>
@@ -188,7 +196,7 @@
         </div>
         <div mat-dialog-actions class="justify-center">
             <button mat-button class="bg-red-400 hover:bg-red-600 text-white" mat-dialog-close="false">Huỷ</button>
-            <button mat-button class="bg-blue-400 hover:bg-blue-600 text-white" mat-dialog-close="true" (click)="CreateDM(DMDetail)">Đồng Ý</button>
+            <button mat-button class="bg-blue-400 hover:bg-blue-600 text-white" mat-dialog-close="true">Đồng Ý</button>
         </div>
     </div>
 </ng-template>

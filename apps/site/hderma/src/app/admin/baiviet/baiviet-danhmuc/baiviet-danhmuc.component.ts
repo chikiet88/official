@@ -8,7 +8,7 @@ import { BaivietService } from '../../../shared/baiviet.service';
 import { GetImage } from '../../../shared/shared.utils';
 
 @Component({
-  selector: 'tazagroup-baiviet-danhmuc',
+  selector: 'taza-base-baiviet-danhmuc',
   templateUrl: './baiviet-danhmuc.component.html',
   styleUrls: ['./baiviet-danhmuc.component.scss'],
 })

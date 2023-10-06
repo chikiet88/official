@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Allow: /
+Sitemap: https://hderma.vn/sitemap.xml
+Sitemap: https://hderma.vn/sitemap_baiviet.xml
+Sitemap: https://hderma.vn/sitemap_sanpham.xml
+

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DanhmucProductService } from '../danhmuc-product.service';
 
 @Component({
-  selector: 'tazagroup-danhmuc-product-detail',
+  selector: 'taza-base-danhmuc-product-detail',
   templateUrl: './danhmuc-product-detail.component.html',
   styleUrls: ['./danhmuc-product-detail.component.scss'],
 })

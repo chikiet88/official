@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { SanphamComponent } from '../sanpham.component';
 import { EditorComponent } from '@tinymce/tinymce-angular';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { GetImage } from '../../../shared/shared.utils';
 import { UsersService } from '../../../shared/users.service';
 import { SanphamService } from '../sanpham.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
-  selector: 'tazagroup-detailsanpham',
+  selector: 'taza-base-detailsanpham',
   templateUrl: './detailsanpham.component.html',
   styleUrls: ['./detailsanpham.component.scss'],
 })
@@ -75,11 +75,8 @@ export class DetailsanphamComponent implements OnInit {
     entity_encoding: 'raw',
         images_upload_handler: (blobInfo: any) => {
           const file = blobInfo.blob();
-          const formData = new FormData();
-          formData.append('file', file);
-          const filePath = `${Date.now()}-${blobInfo.filename()}`;
           const promise = new Promise<string>((resolve, reject) => {
-            this._SanphamService.uploadDriver(formData).subscribe((res) => {
+            this._SanphamService.uploadDriver(file).subscribe((res) => {
               if (res) {   
                 resolve(GetImage(res.spath));
               }
@@ -194,14 +191,14 @@ export class DetailsanphamComponent implements OnInit {
 // import { MatTabChangeEvent } from '@angular/material/tabs';
 // import { DomSanitizer } from '@angular/platform-browser';
 // import { ActivatedRoute, Router } from '@angular/router';
-// import { environment } from '@taza-base/environments';
+// import { environment } from 'apps/site/hderma/src/environments/environments';
 // import { EditorComponent } from '@tinymce/tinymce-angular';
 // import { NotifierService } from 'angular-notifier';
 // import { DanhmucProductService } from '../../danhmuc-product/danhmuc-product.service';
 // import { TagsService } from '../../tags/tags.service';
 // import { SanphamService } from '../sanpham.service';
 // @Component({
-//   selector: 'tazagroup-detailsanpham',
+//   selector: 'taza-base-detailsanpham',
 //   templateUrl: './detailsanpham.component.html',
 //   styleUrls: ['./detailsanpham.component.scss'],
 // })

@@ -16,7 +16,9 @@ export class VnpayService {
   }
 
   async findAll() {
-    return await this.VnpayRepository.find();
+    return await this.VnpayRepository.find({
+
+    });
   }
   async findPagina(page: number, limit: number) {
     const skip = (page - 1) * limit;

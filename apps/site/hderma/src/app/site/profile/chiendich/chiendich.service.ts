@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable()
 export class CustomerchiendichService {
@@ -26,7 +26,6 @@ export class CustomerchiendichService {
         return this._httpClient.get<any>(`${this.APIURL}/hderma-customer-chiendich/${id}`).pipe(
             tap((response: any) => {
                 this._customerchiendich.next(response);
-                console.log(response);
             })
         );
     }
@@ -40,7 +39,6 @@ export class CustomerchiendichService {
     createCustomerchiendich(dulieu: any): Observable<any> {
           return this._httpClient.post<any>(`${this.APIURL}/hderma-customer-chiendich`, dulieu).pipe(
                 map((res: any) => {
-                    console.log(res);
                     return res[1];
                 })
         );

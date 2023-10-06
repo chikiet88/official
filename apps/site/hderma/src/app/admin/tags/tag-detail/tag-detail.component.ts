@@ -6,7 +6,7 @@ import { SanphamService } from '../../sanpham/sanpham.service';
 import { NotifierService } from 'angular-notifier';
 
 @Component({
-  selector: 'tazagroup-tag-detail',
+  selector: 'taza-base-tag-detail',
   templateUrl: './tag-detail.component.html',
   styleUrls: ['./tag-detail.component.scss'],
 })

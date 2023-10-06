@@ -1,0 +1,49 @@
+<div class="flex flex-col space-y-6 max-w-xl m-auto p-4">
+  <div class="text-center text-2xl font-semibold">Phiếu Thông Tin</div>
+  <div class="grid grid-cols-1 gap-4">
+    <mat-form-field appearance="outline" class="w-full text-sm">
+      <mat-label>Họ Tên</mat-label>
+      <input type="text" [(ngModel)]="CUser.Hoten" [ngModelOptions]="{standalone: true}" [disabled]="token" matInput
+        class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Họ Tên'" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full text-sm">
+      <mat-label>Giới Tính</mat-label>
+      <mat-select [(ngModel)]="CUser.Gioitinh" [ngModelOptions]="{standalone: true}" [disabled]="token">
+        <mat-option [value]="'nam'">Nam</mat-option>
+        <mat-option [value]="'nu'">Nữ</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full text-sm">
+      <mat-label>Số Điện Thoại</mat-label>
+      <input type="text" [(ngModel)]="CUser.SDT" [ngModelOptions]="{standalone: true}" [disabled]="token" matInput
+        class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Số Điện Thoại'" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full text-sm">
+      <mat-label>Email</mat-label>
+      <input type="text" [(ngModel)]="CUser.email" [ngModelOptions]="{standalone: true}" [disabled]="token" matInput
+        class="w-full px-3 py-2 border border-gray-200 rounded" [placeholder]="'Email'" />
+    </mat-form-field>
+
+    <div class="justify-center text-center">
+      <a (click)="Begin()" mat-button class="bg-black text-white">Bắt Đầu</a>
+    </div>
+  </div>
+  <div class="flex flex-row space-x-2 justify-center" *ngIf="!token">
+    <span> Vui lòng đăng nhập nếu là thành viên</span><a [href]="'dangnhap'" class="font-bold text-red-600">Đăng
+      Nhập</a>
+  </div>
+</div>
+
+<!-- <ng-template #dialogTemplate>
+  <div mat-dialog-title>Xoá Địa Chỉ</div>
+  <div mat-dialog-content>
+    Bạn Có Chắc Chắn Muốn Xoá Địa Chỉ Này
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" mat-dialog-close="false">Huỷ</button>
+    <button mat-button color="primary" mat-dialog-close="true">Đồng Ý</button>
+  </div>
+</ng-template> -->

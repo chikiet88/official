@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { NotifierService } from 'angular-notifier';
 import { DanhmucService } from '../../shared/danhmuc.service';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -10,7 +10,7 @@ import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree'
 import { SanphamService } from './sanpham.service';
 import { GetImage, nest } from '../../shared/shared.utils';
 @Component({
-  selector: 'tazagroup-sanpham',
+  selector: 'taza-base-sanpham',
   templateUrl: './sanpham.component.html',
   styleUrls: ['./sanpham.component.scss'],
 })
@@ -118,9 +118,7 @@ export class SanphamComponent implements OnInit {
     this._sanphamService.postDanhmuc(data).subscribe((data)=>this._Notification.notify("success","Thêm Thành Công"));
   }
   CreateSanpham(data:any)
-  {
-    console.log(data);
-    
+  {    
     this._sanphamService.postProduct(data).subscribe((data)=>this._Notification.notify("success","Thêm Thành Công"));
   }
   GetImage(data:any)

@@ -3,12 +3,12 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { DangkyService } from '../../dangky/dangky.service';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { DiaChiInit } from '../../../shared/diachi';
 import { UsersService } from '../../../shared/users.service';
+import { DangkyService } from '../../../admin/dangky/dangky.service';
 @Component({
-  selector: 'tazagroup-account',
+  selector: 'taza-base-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
 })
@@ -47,9 +47,17 @@ export class AccountComponent implements OnInit {
     this._usersService.profile$.subscribe(user => {
       if(user){
         this.user = user;
+        console.log(user);
       }
     }
   )
+  }
+  GetDiachi(value:any)
+  {   
+    console.log(value);
+    
+    // this.Diachis = value  
+    // this.isEdit =false;
   }
   displayFn(data: any): string {
     return data && data.name ? data.name : '';

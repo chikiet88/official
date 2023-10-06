@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import {
   BehaviorSubject,
   map,
@@ -54,7 +54,6 @@ export class CheckoutService {
     return this.http.get(`https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1&limit=10`)
       .pipe(
         map((diachi) => {
-          console.log(diachi);
           return diachi
         })
       );
@@ -84,7 +83,6 @@ export class CheckoutService {
   getDonhang() {
     return this.http.get(this.urlApi + `/hderma-donhang`).pipe(
       map((donhangs) => {
-        console.log(donhangs);
         this._donhangs.next(donhangs);
       })
     );

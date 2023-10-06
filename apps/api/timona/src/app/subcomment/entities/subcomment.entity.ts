@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { GiangvienEntity } from '../../giangvien/entities/giangvien.entity';
 import { UsersEntity } from '../../users/entities/user.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('comment',{database:environment.DB_TIMONA.database, orderBy: { CreateAt: 'DESC' } })
 export class SubcommentEntity {
   @PrimaryGeneratedColumn('uuid')

@@ -7,7 +7,7 @@ import {
     ManyToOne,
   } from 'typeorm';
 import { ProductEntity } from '../../product/entities/product.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
   @Entity('hderma-comment', {database:environment.DB_HDERMA.database, orderBy: { CreateAt: 'DESC' } })
   export class CommentEntity {
     @PrimaryGeneratedColumn('uuid')

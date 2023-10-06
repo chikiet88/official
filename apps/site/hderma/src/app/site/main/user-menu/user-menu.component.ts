@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CartService } from '../../cart/cart.service';
 import { WishlistService } from '../../wishlist/wishlist.service';
 import { UsersService } from '../../../shared/users.service';
 import { AuthService } from '../../../admin/auth/auth.service';
+import { LocalStorageService } from '../../../shared/localstorage.service';
+import { GiohangService } from '../../../shared/giohang.service';
+
 
 @Component({
-  selector: 'tazagroup-user-menu',
+  selector: 'taza-base-user-menu',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss'],
 })
 export class UserMenuComponent implements OnInit {
-  token: any = localStorage.getItem('TazagroupToken');
-  User: any;
   constructor(
-    private _cartService: CartService,
+    private _cartService: GiohangService,
     private _wishlistService: WishlistService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _authService: AuthService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _LocalStorageService: LocalStorageService
   ) {}
-
+  token: any = this._LocalStorageService.getItem('TazagroupToken')||null;
+  User: any;
   ngOnInit(): void {
     if (this.token) {
       this._usersService.getProfile().subscribe();

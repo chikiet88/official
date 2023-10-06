@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { NotifierService } from 'angular-notifier';
 import { TichdiemService } from '../../../admin/tichdiem/tichdiem.service';
@@ -8,8 +8,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HoahongService } from '../../../admin/cauhinh/hoahong/hoahong.service';
 import { UsersService } from '../../../shared/users.service';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
-  selector: 'tazagroup-referral',
+  selector: 'taza-base-referral',
   templateUrl: './referral.component.html',
   styleUrls: ['./referral.component.scss'],
 })
@@ -35,6 +36,7 @@ export class ReferralComponent implements OnInit {
     private _notifierService: NotifierService,
     private _tichdiemService: TichdiemService,
     private _hoahongService: HoahongService,
+    @Inject(PLATFORM_ID) private platformId: object
     ) {}   
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
@@ -51,15 +53,23 @@ export class ReferralComponent implements OnInit {
       {
         if(data)
         {
+
+
         this.User = data;
-        this.Linkgioithieu = `${window.location.origin}/dangky?ref=${data.id}`;
+        if (isPlatformBrowser(this.platformId)) {
+          this.Linkgioithieu = `${window.location.origin}/dangky?ref=${data.id}`;
+          }
+          else
+          {
+            this.Linkgioithieu = `${window.location.origin}/dangky?ref=${data.id}`;
+          }
+        
         this._tichdiemService.getCustomerByidUser(data.id).subscribe((data1)=>
         {
         this.Custom =  data1
         this.dataSource = new MatTableDataSource(data1.REF);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(data1);
         })
         }
       }

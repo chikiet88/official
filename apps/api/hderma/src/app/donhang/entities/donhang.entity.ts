@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { DonhangchitietEntity } from '../../donhangchitiet/entities/donhangchitiet.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma-donhang', {
   database:environment.DB_HDERMA.database,
     orderBy: {
@@ -31,16 +31,8 @@ export class DonhangEntity {
     Diachi: string;
     @Column({ type: "text", collation: "utf8_general_ci" })
     Ghichu: string;
-    @Column({ type: "text", collation: "utf8_general_ci" })
-    Payment: string;
-    @Column({ type: "text", collation: "utf8_general_ci" })
-    Shipping: string;
     @Column({ default: 0 })
     Status: number;
-    @Column({ default: 0 })
-    View: number;
-    @Column({default: 0 })
-    TotalAmount:number;
     @Column({ default: 1 })
     Trangthai: number;
     @CreateDateColumn()

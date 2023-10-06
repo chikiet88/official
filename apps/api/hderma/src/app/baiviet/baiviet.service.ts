@@ -16,15 +16,9 @@ export class BaivietService {
   }
 
   async findAll() {
-    return await this.BaivietRepository.find();
-  }
-  async searchbaiviet(query: string): Promise<any[]> {
-    return await this.BaivietRepository
-      .createQueryBuilder('baiviet')
-      .where('LOWER(baiviet.Title) LIKE LOWER(:query)', { query: `%${query}%` })
-      .orWhere('LOWER(baiviet.Mota) LIKE LOWER(:query)', { query: `%${query}%` })
-      // Add more conditions for additional fields (e.g., description, genre, etc.)
-      .getMany();
+    return await this.BaivietRepository.find({
+
+    });
   }
   async findPagina(page: number, limit: number) {
     const skip = (page - 1) * limit;

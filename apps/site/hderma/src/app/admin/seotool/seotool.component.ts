@@ -150,7 +150,6 @@ export class SeotoolComponent implements OnInit {
   }
   ngOnInit(): void {
     this._SeotoolService.getSeotools().subscribe((data)=>{
-      console.log(data);
       this.FilterLists = this.Lists = data
     })
   }

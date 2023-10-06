@@ -27,9 +27,9 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    const redirectUrl = state.url === '/dangxuat' ? '/' : state.url;
+    const redirectURL = state.url === '/dangxuat' ? '/' : state.url;
     let checkLogin;
-    this._check(redirectUrl).subscribe((data)=>{checkLogin =data});
+    this._check(redirectURL).subscribe((data)=>{checkLogin =data});
     if(checkLogin)
     {
       return this._usersService.getProfile().pipe(
@@ -47,7 +47,7 @@ export class AdminGuard implements CanActivate {
     }
     else
     {
-      this._router.navigate(['/dangnhap'], { queryParams: { redirectUrl } });
+      this._router.navigate(['/dangnhap'], { queryParams: { redirectURL } });
       return false;
     }
   }
@@ -59,9 +59,9 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const redirectUrl = state.url === '/dangxuat' ? '/' : state.url;
+    const redirectURL = state.url === '/dangxuat' ? '/' : state.url;
 
-    return this._check(redirectUrl);
+    return this._check(redirectURL);
   }
   canLoad(
     route: Route,

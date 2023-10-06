@@ -9,8 +9,10 @@ import { SwiperModule } from 'swiper/angular';
 import { CheckoutComponent } from './checkout.component';
 import { AccountNotificationsService } from '../../admin/account-notifications/account-notifications.service';
 import { CamonComponent } from './camon/camon.component';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete'; 
-import { DiachiComponent } from '../../shared/diachi/diachi.component';
+// import { DiachiComponent } from '../../shared/diachi/diachi.component';
+import { DiachiModule } from '../../shared/common/diachi/diachi.module';
+import { VnpayModule } from '../../shared/common/vnpay/vnpay.module';
+import { GiaohangtietkiemModule } from '../../shared/common/giaohangtietkiem/giaohangtietkiem.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,12 +22,14 @@ import { DiachiComponent } from '../../shared/diachi/diachi.component';
     ReactiveFormsModule,
     SwiperModule,
     EditorModule,
-    GooglePlaceModule,
+    DiachiModule,
+    VnpayModule,
+    GiaohangtietkiemModule,
     RouterModule.forChild([
       {
         path: '',
         component: CheckoutComponent,
-        children: [{path:'diachi',component:DiachiComponent}],
+        // children: [{path:'diachi',component:DiachiComponent}],
       },
     ]),
   ],

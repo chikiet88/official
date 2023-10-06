@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import {
   BehaviorSubject,
   map,
@@ -57,7 +57,6 @@ export class DonhangService {
   getDonhang() {
     return this.http.get(this.urlApi + `/hderma-donhang`).pipe(
       map((donhangs) => {
-        console.log(donhangs);
         this._donhang.next(donhangs);
         return donhangs;
       })
@@ -81,7 +80,6 @@ export class DonhangService {
   getDonhangByidKH(idKH:any) {
     return this.http.get(this.urlApi + `/hderma-donhang/user/${idKH}`).pipe(
       map((donhangs) => {
-        console.log(donhangs);
         this._donhang.next(donhangs);
         return donhangs;
       })

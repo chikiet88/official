@@ -1,196 +1,172 @@
-<div class="bg-white">
-  <div class="container mx-auto">
-    <swiper [config]="confighomepage" class="mySwiper">
+<div class="py-2 flex flex-row justify-between w-full m-auto">
+  <swiper [config]="confighomepage" class="mySwiper">
+    <ng-template swiperSlide>
+      <div class="w-full h-full">
+        <img class="lg:flex hidden m-auto" src="https://hderma.vn/assets/trangchu/kem-duong-phuc-hoi-chuyen-sau.png" alt="">
+        <img class="flex lg:hidden m-auto" src="https://hderma.vn/assets/trangchu/kem-duong-phuc-hoi-chuyen-sau-mobile.png" alt="">
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="w-full h-full relative">
+        <img class="lg:flex hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu1.jpg" alt="">
+        <img class="flex lg:hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu1_mobile.jpg" alt="">
+        <div class="hidden absolute lg:flex flex-col space-y-4 top-1/3 left-[20px] p-12 bg-white shadow-md max-w-xl font-medium">
+          <span class="text-4xl">VẺ ĐẸP LÀ SỰ PHÙ HỢP </span>
+          <span class="text-lg">H.Derma cung cấp giải pháp điều trị và phục hồi chuyên sâu cho từng tình trạng da ở mức độ cấp tế bào.</span>
+          <a href="/san-pham"><button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">VÀO CỬA HÀNG</button></a>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="w-full h-full">
+        <img class="lg:flex hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu2.jpg" alt="">
+        <img class="flex lg:hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu2_mobile.jpg" alt="">
+      </div>
+    </ng-template>
+    <ng-template swiperSlide>
+      <div class="w-full h-full">
+        <img class="lg:flex hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu3.jpg" alt="">
+        <img class="flex lg:hidden m-auto" src="https://hderma.vn/assets/trangchu/trangchu3_mobile.jpg" alt="">
+      </div>
+    </ng-template>
+  </swiper>
+</div>
+
+<div class="lg:pt-20 pt-10 flex flex-col space-y-8 justify-between max-w-[1440px] m-auto">
+  <div class="uppercase lg:text-5xl text-3xl leading-snug text-center">
+    Lý do lựa chọn h.derma?
+  </div>
+  <div class="grid lg:grid-cols-4 grid-cols-2 lg:gap-4 m-auto">
+    <div class="flex flex-col space-y-3 text-center p-4" *ngFor="let item of Lydo">
+      <img [src]="item.Icon" class="h-20">
+      <div class="text-2xl font-normal">{{item.Content1}}</div>
+      <div class="hidden lg:flex">{{item.Content2}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="lg:pt-20 pt-10 flex flex-col space-y-8 justify-between max-w-[1440px] m-auto">
+  <div class="uppercase lg:text-5xl text-3xl leading-snug text-center">
+    GIẢI PHÁP CHO TÌNH TRẠNG DA
+  </div>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Trị Nám Da">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['001','002','004','005'])"></app-swiperslide>
+      </div>
+    </mat-tab>
+    <mat-tab label="Trẻ Hoá Da ">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['T.610','003','T.606'])"></app-swiperslide>
+      </div>
+    </mat-tab>
+    <mat-tab label="Cấp Ẩm Da">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['D.350','T.201','D.502'])"></app-swiperslide>
+      </div>
+    </mat-tab>
+    <mat-tab label="Làm Sạch Sâu">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['D.100','D.504','D.201','D.202'])"></app-swiperslide>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+
+<div class="pt-10 flex flex-col space-y-8 justify-between max-w-[1440px] m-auto">
+  <div class="py-4">
+    <swiper [config]="configdanhgia" class="mySwiper font-medium">
       <ng-template swiperSlide>
-        <div class="w-full h-full">
-          <img src="/assets/trangchu/trangchu1.jpg" alt="">
+        <div class="bg-gray-100 rounded-lg grid grid-cols-1 gap-4 content-between text-justify w-full h-72 p-8">
+          <div class="text-blue-600">“Mình rất yên tâm và tin tưởng lựa chọn các dòng sản phẩm từ H.Derma. Hầu hết khi
+            sử dụng đều không gặp bất cứ ảnh hưởng tiêu cực gì đến làn da. Nếu có ý định “kết thân” với sản phẩm của
+            thương hiệu này thì bạn không cần lo lắng về vấn đề an toàn.”</div>
+          <div class="text-xl">KHÁCH HÀNG THẢO TIÊN</div>
         </div>
       </ng-template>
       <ng-template swiperSlide>
-        <div class="w-full h-full">
-          <img src="/assets/trangchu/trangchu1.jpg" alt="">
+        <div class="bg-gray-100 rounded-lg grid grid-cols-1 gap-4 content-between text-justify w-full h-72 p-8">
+          <div class="text-blue-600">“Nó không chỉ làm mờ nếp nhăn, vết chân chim – nỗi lo lắng bấy lâu của mình, mà
+            ngay cả lỗ chân lông cũng được se khít, vết thâm sạm nám cũng mờ và giảm hẳn. “Xuất sắc” nhất của sản phẩm
+            nhà H.Derma chỗ KHÔNG gây kích ứng da.”</div>
+          <div class="text-xl">KHÁCH HÀNG QUỲNH NGA</div>
+        </div>
+      </ng-template>
+      <ng-template swiperSlide>
+        <div class="bg-gray-100 rounded-lg grid grid-cols-1 gap-4 content-between text-justify w-full h-72 p-8">
+          <div class="text-blue-600">“Mình rất yên tâm và tin tưởng lựa chọn các dòng sản phẩm từ H.Derma. Hầu hết khi
+            sử dụng đều không gặp bất cứ ảnh hưởng tiêu cực gì đến làn da. Nếu có ý định “kết thân” với sản phẩm của
+            thương hiệu này thì bạn không cần lo lắng về vấn đề an toàn.”</div>
+          <div class="text-xl">KHÁCH HÀNG THẢO TIÊN</div>
         </div>
       </ng-template>
     </swiper>
+  </div>
+</div>
 
+<div class="lg:pt-20 pt-10 flex flex-col space-y-8 justify-between max-w-[1440px] m-auto">
+  <div class="uppercase lg:text-5xl text-3xl leading-snug text-center">
+    H.DERMA GỢI Ý CHO BẠN
   </div>
-  <div class="lg:pt-20 pt-10 px-3 lg:px-0">
-    <div class="container mx-auto lg:flex">
-      <div class="lg:w-1/2 relative">
-        <img src="/assets/trangchu/trangchu2.jpg" class="w-[830px]" alt="" />
-        <div class="absolute left-1/2 -bottom-10" style="border: 6px solid white;">
-          <img src="/assets/trangchu/trangchu3.jpg" class="w-[671px]" alt="" />
-        </div>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="SẢN PHẨM BÁN CHẠY">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['D.350', 'T.606', 'T.240', 'T.201'])"></app-swiperslide>
       </div>
-      <div class="lg:w-1/2 lg:p-5 flex flex-col items-center lg:space-y-5 space-y-3 pt-5 lg:pt-0 banner-hot-product">
-        <div class="relative">
-          <img src="/assets/trangchu/trangchu4.jpg" class="z-10 relative w-[338px]" alt="" />
-        </div>
-        <h3 class="text-3xl uppercase text-center font-bold">
-          Bọt rửa mặt phục hồi dịu nhẹ da H.Derma Revitalizing Cleanser
-        </h3>
-        <p class=" text-center font-medium lg:w-3/4 w-full lg:px-5 font-mt">
-          Sữa rửa mặt tạo bọt sạch sâu và phục hồi dịu nhẹ với 15% Niacinamide, 10% Vitamin B5
-        </p>
-        <div class="flex items-center pr-5">
-          <div class="flex items-center space-x-2 font-bold border-b border-black cursor-pointer">
-            <span class="text-2xl">Mua ngay</span>
-            <span class="material-icons"> east </span>
-          </div>
-        </div>
+    </mat-tab>
+    <mat-tab label="SẢN PHẨM MỚI">
+      <div class="py-8">
+        <app-swiperslide [config]="config" [data]="GetTags(Sanphams,['D.400', 'D.301', 'D.405', 'T.610', 'T.240', 'T.270'])"></app-swiperslide>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="flex flex-col space-y-8 justify-between w-full m-auto">
+  <div class="relative">
+    <img class="lg:flex hidden m-auto" src="https://hderma.vn/assets/trangchu/hinhgiua.jpg" alt="">
+    <img class="flex lg:hidden m-auto" src="https://hderma.vn/assets/trangchu/hinhgiua_mobile.jpg" alt="">
+    <div class="hidden absolute lg:flex flex-col space-y-6 max-w-md top-1/3 left-[20%]">
+      <div class="font-medium text-5xl">CHIỀU DA HẾT Ý</div>
+      <div class="font-medium text-xl">H.Derma cung cấp giải pháp điều trị và phục hồi chuyên sâu cho từng tình trạng da
+        ở mức độ cấp tế bào.</div>
+      <div>
+        <button type="button"
+          class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">VÀO
+          CỬA HÀNG</button>
       </div>
     </div>
-  </div>
-
-  <div class="lg:pt-20 pt-10 px-3 lg:px-0" *ngIf="items?.length > 0">
-    <div class="container mx-auto space-y-10">
-      <div class="flex flex-col items-center justify-center space-y-5">
-        <h2 class="lg:text-[40px] text-3xl text-center font-bold uppercase">
-          Làn da bạn đang mong muốn điều gì?
-        </h2>
-        <p class="text-center">
-          H.Derma cung cấp giải pháp điều trị và phục hồi chuyên sâu cho từng
-          tình trạng da ở mức độ cấp tế bào.
-        </p>
-      </div>
-      <div class="lg:block hidden">
-        <swiper [config]="config" class="mySwiper">
-          <ng-template swiperSlide *ngFor="let item of items">
-            <div class="space-y-5 cursor-pointer" (click)="getTags(item)" routerLink="san-pham">
-              <img src="https://drive.google.com/uc?id={{ item.Image }}" class="w-full h-full bg-white shadow-md" alt="" />
-              <div [innerHTML]="item.Tieude" class="text-center font-thin font-mt">
-                <sup>12</sup>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
-      </div>
-
-      <div class="lg:hidden block">
-        <swiper [config]="config" [pagination]="{ clickable: true }" class="mySwiper carouesl-product">
-          <ng-template swiperSlide *ngFor="let child of itemsMobile">
-            <div class="grid grid-cols-1 gap-5">
-              <div class="space-y-5 cursor-pointer" *ngFor="let item of child"  routerLink="san-pham">
-                <img src="https://drive.google.com/uc?id={{ item.Image }}" class="w-full bg-white" alt="" />
-                <div [innerHTML]="item.Tieude" class="text-center font-thin font-mt">
-                  <sup>12</sup>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-        </swiper>
-      </div>
+    <div class="lg:hidden flex absolute bottom-4 inset-0 items-end justify-center">
+      <button type="button"
+        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">VÀO
+        CỬA HÀNG</button>
     </div>
   </div>
-
-  <!-- <div class="lg:pt-20 pt-10 px-3 lg:px-0">
-    <div class="container mx-auto lg:flex items-center lg:space-x-10 space-y-10 lg:space-y-0">
-      <div class="lg:w-1/2 w-full relative banner-hover group cursor-pointer rounded-md">
-        <img src="https://drive.google.com/uc?id=1uENY3qp0iwV1EnUxu33XHPGI5huKbSGL" alt="" class="w-full" />
-        <div class="absolute z-0 left-0 top-0 w-full h-full bg-black opacity-0 group-hover:opacity-40"></div>
-        <div class="banner-line"></div>
-      </div>
-      <div class="lg:w-1/2 w-full relative banner-hover group cursor-pointer rounded">
-        <img src="https://drive.google.com/uc?id=1xazMKBUPuzRXwulGJ2zea0G2P5tGtuoM" alt="" class="w-full" />
-        <div class="absolute z-0 left-0 top-0 w-full h-full bg-black opacity-0 group-hover:opacity-40"></div>
-        <div class="banner-line"></div>
-      </div>
-    </div>
-  </div> -->
-  <div class="pt-10 px-3 lg:px-0">
-    <div class="container mx-auto space-y-4">
-      <div class="py-4 lg:flex space-y-3 lg:space-y-0 items-center justify-between">
-        <h3 class="text-3xl font-bold uppercase">
-          Sản phẩm được yêu thích nhất
-        </h3>
-        <div>
-          <span class="lg:text-base text-sm uppercase font-bold border-b border-black">Xem Thêm</span>
-        </div>
-      </div>
-      <tazagroup-san-pham [products]="hotProduct" [data]="wishlists"></tazagroup-san-pham>
-    </div>
+</div>
+<div class="lg:pt-20 pt-10 flex flex-col space-y-8 justify-between max-w-[1440px] m-auto">
+  <div class="uppercase lg:text-5xl text-3xl leading-snug text-center">
+    KHÁM PHÁ HDERMA
   </div>
-  <div class="lg:pt-20 pt-10 px-3 lg:px-0">
-    <div class="container mx-auto space-y-10">
-      <div class="py-4 lg:flex space-y-3 lg:space-y-0 items-center justify-between">
-        <h3 class="lg:text-4xl text-2xl font-bold uppercase">Sản phẩm bán chạy nhất</h3>
-        <div>
-          <span class="lg:text-base text-sm uppercase font-bold border-b border-black">View all products</span>
-        </div>
-      </div>
-      <tazagroup-san-pham [products]="bestSeller" [data]="wishlists"></tazagroup-san-pham>
-    </div>
-  </div>
-  <div class="lg:pt-20 pt-10">
-    <div class="container mx-auto lg:flex items-center lg:space-x-20">
-      <div class="lg:w-1/2">
-        <div class="relative">
-          <img src="/assets/trangchu/matna1.jpg" class="lg:w-2/3" alt="" />
-          <div class="absolute left-[55%] top-[13%] hidden lg:block">
-            <img src="/assets/trangchu/matna2.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-      <div class="lg:w-1/2 lg:space-y-5 space-y-3 px-3 lg:px-0">
-        <h3 class="text-3xl leading-none w-full font-bold uppercase text-justify">
-          Mặt nạ tảo biển phục hồi sáng da H.Derma Algae Extract Hydrating Mask
-        </h3>
-        <p class="lg:w-[90%] w-full text-justify">
-          Với chiết xuất Laminaria Ochroleuca Extract (tảo lục) cao cấp được nhập khẩu từ Pháp kết hợp cùng thành phần
-          Niacinamide, HA, Vitamin B5, Peptide dưỡng ẩm phục hồi, giúp da săn chắc và ngăn ngừa mụn hiệu quả.
-        </p>
-        <div class="flex items-center pr-5">
-          <div class="flex items-center space-x-2 font-bold border-b border-black cursor-pointer">
-            <span>Khám phá ngay</span>
-            <span class="material-icons"> east </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="lg:pt-20 pt-10 px-3 lg:px-0">
-    <div class="container mx-auto space-y-10">
-      <h3 class="text-4xl text-center font-bold uppercase">Blog làm đẹp</h3>
-      <div class="grid lg:grid-cols-3 grid-cols-1 gap-5">
-        <div class="space-y-3 blog-item cursor-pointer" *ngFor="let item of data" routerLink="/bai-viet/{{item.Slug}}">
-          <div class="w-full overflow-hidden rounded-xl ">
-              <img src="https://drive.google.com/uc?id={{item.Image}}" alt="">
-          </div>
-
-          <div>
-              <div class="text-xl, !text-black font-gb underline-title text-justify three-dot w-full" [innerHTML]="item.Title">
-              </div>
-          </div>
-          <p class="text-justify lg:text-xl text-sm one-dot" [innerHTML]="item.Mota">
-          </p>
-          <div class="lg:hidden block">
-              <a class="text-sm underline">Đọc thêm</a>
-          </div>
-      </div>
-      </div>
-    </div>
-  </div>
-  <div class="text-white py-7 mt-5" style="background: #231f20;">
-    <div class="container mx-auto">
-      <div class="font-bold grid lg:grid-cols-4 grid-cols-2 lg:gap-10 gap-5">
-        <div class="flex space-x-2 items-center">
-          <img src="/assets/trangchu/thanhtoanicon.png" alt="">
-          <span>Thanh toán an toàn</span>
-        </div>
-        <div class="flex space-x-2 items-center">
-          <img src="/assets/trangchu/giaohangicon.png" alt="">
-          <span>Giao hàng nhanh chóng</span>
-        </div>
-        <div class="flex space-x-2 items-center">
-          <img src="/assets/trangchu/uudaiicon.png" alt="">
-          <span>Ưu đãi độc quyền</span>
-        </div>
-        <div class="flex space-x-2 items-center">
-          <img src="/assets/trangchu/tuvanicon.png" alt="">
-          <span>Tư vấn cùng chuyên gia</span>
-        </div>
-      </div>
-    </div>
+  <div class="py-8">
+    <swiper [config]="configdanhgia" class="mySwiper !pb-12">
+      <ng-template swiperSlide>
+        <a href="/san-pham" class="flex flex-col space-y-3 text-center transition duration-150 ease-in-out hover:scale-105">
+            <img src="https://hderma.vn/assets/trangchu/hethongcuahang.jpg" alt="" srcset="">
+          <a href="/san-pham" class="text-xl font-medium">Vào Cửa Hàng</a>
+        </a>
+      </ng-template>
+      <ng-template swiperSlide>
+        <a href="/blog/tin-tucs" class="flex flex-col space-y-3 text-center transition duration-150 ease-in-out hover:scale-105">
+            <img src="https://hderma.vn/assets/trangchu/chiase.jpg" alt="" srcset="">
+          <div class="text-xl font-medium">Góc Chia Sẽ</div>
+        </a>
+      </ng-template>
+      <ng-template swiperSlide>
+        <a href="/ve-chung-toi" class="flex flex-col space-y-3 text-center transition duration-150 ease-in-out hover:scale-105">
+            <img src="https://hderma.vn/assets/trangchu/hderma.jpg" alt="" srcset="">
+          <div class="text-xl font-medium">Câu Chuyện H.Derma</div>
+        </a>
+      </ng-template>
+    </swiper>
   </div>
 </div>

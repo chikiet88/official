@@ -5,7 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
-  selector: 'tazagroup-login-admin',
+  selector: 'taza-base-login-admin',
   templateUrl: './login-admin.component.html',
   styleUrls: ['./login-admin.component.scss'],
 })
@@ -150,7 +150,6 @@ export class LoginAdminComponent implements OnInit {
       });
     } else {
       this._authService.Dangnhap(user).subscribe(data => {
-        console.log(data);
         if (!data[0]) {
           this._notifierService.show({
             message: data[1],

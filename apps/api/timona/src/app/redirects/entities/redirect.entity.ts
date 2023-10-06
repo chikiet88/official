@@ -1,5 +1,5 @@
 import {Entity,Column,PrimaryGeneratedColumn,CreateDateColumn, UpdateDateColumn} from 'typeorm';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('redirect', {database:environment.DB_TIMONA.database, orderBy: { Ngaytao: 'DESC' } })
 export class RedirectsEntity {
     @PrimaryGeneratedColumn('uuid')

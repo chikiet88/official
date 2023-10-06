@@ -13,7 +13,6 @@ export class JwtStrategy extends PassportStrategy(Strategy,'hderma') {
     }
     async validate(payload: any) {
         return payload;
-        
       }
     // async validate(user:User): Promise<any> {
     //     const data = await this.authService.validateUser(user);

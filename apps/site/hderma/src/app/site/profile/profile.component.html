@@ -1,30 +1,21 @@
-
-
-<div class="lg:max-w-7xl lg:p-8 p-2 m-auto">
-  <mat-drawer-container class="example-container w-full h-[80vh] lg:rounded-md bg-white rounded-md" autosize>
-    <mat-drawer #drawer [mode]="mode" [opened]="isOpened" class="!flex flex-col flex-auto min-w-0 relative h-full w-full lg:w-4/5" position="end">
-      <div class="relative flex flex-col h-full w-full overflow-auto">
-        <div class="lg:hidden flex"><span class="material-icons p-3 hover:bg-gray-200 rounded-full" (click)="drawer.close()">
-            cancel
-          </span></div>
-          <div class="p-4">
-            <router-outlet></router-outlet>
-          </div>
-
+<div class="lg:max-w-7xl lg:py-8 grid lg:grid-cols-4 lg:gap-4 grid-cols-1 gap-0 space-y-2 m-auto p-3">
+    <div class="lg:hidden flex w-full">
+      <mat-form-field appearance="outline" class="w-full">
+          <mat-select class="w-full" (change)="GoToPage(Menu)" [(ngModel)]="Menu" [ngModelOptions]="{standalone: true}">
+            <mat-option [value]="item" *ngFor="let item of Menus">{{item.Title}}</mat-option>
+          </mat-select>
+        </mat-form-field>   
+    </div>
+      <div class="hidden lg:flex col-span-1 flex-col pb-2 md:pb-6 border border-border-base rounded-md overflow-hidden">
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="account"   routerLinkActive="text-white bg-black" >Thông Tin Tài Khoản</div>
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="donhang"   routerLinkActive="text-white bg-black" >Đơn Hàng</div>
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="tichdiem"  routerLinkActive="text-white bg-black" >Tích Điểm</div>
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="referral"  routerLinkActive="text-white bg-black" >Giới Thiệu</div>
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="chiendich" routerLinkActive="text-white bg-black">Chiến Dịch</div>
+        <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200 hover:text-black" routerLink="../admin"  routerLinkActive="text-white bg-black" >Trang Quản Trị</div>
+        <div class="p-4 flex flex-col hover:bg-gray-200 hover:text-black" (click)="Dangxuat()">Đăng Xuất</div>
       </div>
-    </mat-drawer>
-    <mat-drawer-content class="!flex flex-col flex-auto min-w-0 relative">
-      <div class="relative flex flex-col">
-          <div class="flex flex-col w-full h-full">
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="account"  routerLinkActive="bg-gray-200" (click)="drawer.open()">Thông Tin Tài Khoản</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="donhang"  routerLinkActive="bg-gray-200" (click)="drawer.open()">Đơn Hàng</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="tichdiem" routerLinkActive="bg-gray-200" (click)="drawer.open()">Tích Điểm</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="referral" routerLinkActive="bg-gray-200" (click)="drawer.open()">Giới Thiệu</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="chiendich" routerLinkActive="bg-gray-200" (click)="drawer.open()">Chiến Dịch</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" routerLink="../admin" routerLinkActive="bg-gray-200" (click)="drawer.open()">Trang Quản Trị</div>
-            <div class="p-4 border-b-2 flex flex-col hover:bg-gray-200" (click)="Dangxuat()">Đăng Xuất</div>
-          </div>
-      </div>
-    </mat-drawer-content>
-  </mat-drawer-container>
+  <div class="col-span-3 p-3 rounded-lg border overflow-auto">
+    <router-outlet></router-outlet>
+  </div>
 </div>

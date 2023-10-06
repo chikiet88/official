@@ -17,7 +17,7 @@ export class CustomerController {
     return this.customerService.findAll();
   }
 
-  @Get('findid/:id')
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.customerService.findOne(id);
   }
@@ -25,7 +25,7 @@ export class CustomerController {
   findDiemByidUser(@Param('id') id: string) {
     return this.customerService.findDiemByidUser(id);
   }
-  @Get('findidUser/:id')
+  @Get('idUser/:id')
   findByidUser(@Param('id') id: string) {
     return this.customerService.findByidUser(id);
   }

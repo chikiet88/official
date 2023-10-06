@@ -6,7 +6,7 @@
 // import { ListChiendich,ListCauhinh } from '../cauhinh';
 // import { HoahongService } from '../hoahong/hoahong.service';
 // @Component({
-//   selector: 'tazagroup-chiendich',
+//   selector: 'taza-base-chiendich',
 //   templateUrl: './chiendich.component.html',
 //   styleUrls: ['./chiendich.component.scss'],
 // })

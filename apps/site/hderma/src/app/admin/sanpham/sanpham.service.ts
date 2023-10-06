@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, switchMap, take } from 'rxjs';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Injectable({
   providedIn: 'root',
 })
@@ -48,7 +48,7 @@ export class SanphamService {
     );
   }
   getById(id: string) {
-    return this.http.post(this.urlApi + `/hderma-product/findid`,{id}).pipe(
+    return this.http.get(this.urlApi + `/hderma-product/findid/${id}`).pipe(
       map((product) => {
         this._product.next(product);
         return product;
@@ -186,11 +186,9 @@ export class SanphamService {
     );
   }
   DeleteuploadDriver(data: any): Observable<any> {
-    console.log(data);
     return this.http.delete(this.urlApi + `/upload/${data.id}`,{ body: data }).pipe(
       map((res: any) => {
         if (res) {
-          console.log(res);
           return res;
         }
       })

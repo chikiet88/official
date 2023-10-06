@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +24,15 @@ export class BaivietService {
   constructor(private http: HttpClient) { }
   getBaiviets() {
     return this.http.get(this.urlApi + '/hderma-baiviet').pipe(
-      map((data: any) => {
+      map((data: any) => { 
         this._baiviets.next(data);
+        return data;
+      })
+    );
+  }
+  searchBaiviet(query:any) {
+    return this.http.get(this.urlApi + `/hderma-baiviet/search?query=${query}`).pipe(
+      map((data: any) => { 
         return data;
       })
     );
@@ -34,6 +41,14 @@ export class BaivietService {
     return this.http.get(this.urlApi + `/hderma-baiviet/findslug/${slug}`).pipe(
       map((data: any) => {
         this._baiviet.next(data);
+        return data;
+      })
+    );
+  }
+  getPaginaBaiviets(page: number, limit: number) {
+    const params ={ page: String(page), limit: String(limit) }
+    return this.http.get(this.urlApi+'/hderma-baiviet/pagina',{ params }).pipe(
+      map((data: any) => {
         return data;
       })
     );

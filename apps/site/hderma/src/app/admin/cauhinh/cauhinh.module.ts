@@ -61,8 +61,6 @@ const customNotifierOptions: NotifierOptions = {
     NhiemvuComponent,
     DoiquaComponent,
     ChiendichChitietComponent,
-    CauhinhchungComponent,
-    CauhinhChitietComponent,
     CauhinhapiComponent
   ],
   imports: [
@@ -97,16 +95,7 @@ const customNotifierOptions: NotifierOptions = {
             path: 'doiqua',
             component: DoiquaComponent,
           },
-          {
-            path: 'cauhinhchung',
-            component: CauhinhchungComponent,
-            children:[
-              {
-                path: ':slug',
-                component: CauhinhChitietComponent,
-              }
-            ]
-          },
+          { path: 'cauhinhchung', loadChildren: () => import('./cauhinhchung/cauhinhchung.module').then(m => m.CauhinhchungModule) },
           {
             path: 'cauhinhapi',
             component: CauhinhapiComponent,

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,6 @@ export class HoahongService {
     return this._httpClient.get<any>(`${this.APIURL}/cauhinh-hoahong/${id}`).pipe(
       tap((response: any) => {
         this._hoahong.next(response);
-        console.log(response);
       })
     );
   }
@@ -37,7 +36,6 @@ export class HoahongService {
       switchMap(datas => this._httpClient.post<any>(`${this.APIURL}/cauhinh-hoahong`, dulieu).pipe(
         map((res: any) => {
           this._hoahongs.next([res[1], ...datas]);
-          console.log(res);
           return res[1];
         })
       ))

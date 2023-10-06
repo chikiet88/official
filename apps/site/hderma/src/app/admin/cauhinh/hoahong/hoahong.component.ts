@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { HoahongService } from './hoahong.service';
 @Component({
-  selector: 'tazagroup-hoahong',
+  selector: 'taza-base-hoahong',
   templateUrl: './hoahong.component.html',
   styleUrls: ['./hoahong.component.scss'],
 })

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { result } from 'lodash-es';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable({
@@ -39,7 +39,6 @@ export class HinhanhService {
     return this._httpClient.get<any>(`${this.APIURL}/upload/id`).pipe(
       tap((response: any) => {
         this._hinhanh.next(response);
-        console.log(response);
       })
     );
   }
@@ -56,7 +55,6 @@ export class HinhanhService {
       switchMap(datas => this._httpClient.post<any>(`${this.APIURL}/upload`, dulieu).pipe(
         map((res: any) => {
           this._hinhanhs.next([res[1], ...datas]);
-          console.log(res);
           return res[1];
         })
       ))

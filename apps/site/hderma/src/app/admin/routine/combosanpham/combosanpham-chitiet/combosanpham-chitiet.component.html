@@ -1,0 +1,191 @@
+<div class="!flex flex-col flex-auto min-w-0 relative bg-white">
+  <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
+    <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
+      arrow_back
+    </span>
+    <div>
+      <button mat-raised-button color="primary" (click)="Update(Detail)">Cập Nhật</button>
+    </div>
+  </div>
+  <div class="relative w-full flex flex-col space-y-6 justify-between p-4 bg-gray-100">
+    <div class="grid lg:grid-cols-2 gap-4 w-full">
+      <div class="p-4 rounded-lg shadow-md bg-white">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Tiêu Đề</mat-label>
+          <input [(ngModel)]="Detail.Title" [ngModelOptions]="{standalone: true}" matInput type="text" class="w-full"
+            placeholder="Tiêu Đề" />
+        </mat-form-field>
+        <div class="font-bold">Mô Tả</div>
+        <editor [apiKey]="APITINYMCE" [(ngModel)]="Detail.Mota" [ngModelOptions]="{standalone: true}"
+          [init]="configTiny"></editor>
+      </div>
+
+      <div class="p-4 rounded-lg shadow-md bg-white">
+        <div class="font-bold">Mô Tả Thêm</div>
+        <editor [apiKey]="APITINYMCE" [(ngModel)]="Detail.Mota2" [ngModelOptions]="{standalone: true}"
+          [init]="configTiny"></editor>
+      </div>
+
+    
+     </div>
+
+      <div class="grid lg:grid-cols-2 grid-cols-1 gap-4">
+        <div class="flex flex-col space-y-2 p-4 rounded-lg shadow-md bg-white">
+          <div class="flex flex-row space-x-2 items-center">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Sản Phẩm</mat-label>
+              <input type="text" matInput [(ngModel)]="SelectSanpham" [ngModelOptions]="{standalone: true}"
+                [matAutocomplete]="autoSanpham" (input)="applyFilter($event)">
+              <mat-autocomplete #autoSanpham="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let item of filterSanphams" [value]="item" (click)="ChoosenSanpham(item)">
+                  <div class="flex flex-row space-x-2 items-center">
+                    <img [src]="GetImage(item.Hinhanh)" class="h-10">
+                    <span>{{item.Tieude}}</span>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="flex flex-row space-x-2 justify-between" *ngFor="let item of Detail.Sanpham; let i = index">
+            <div class="flex flex-row space-x-2">
+              <img [src]="GetImage(item.Hinhanh)" class="h-10">
+              <div>{{item.Tieude}}</div>
+            </div>
+            <div (click)="RemoveSanpham(item)"><span class="material-symbols-outlined">
+                do_not_disturb_on
+              </span></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-2 p-4 rounded-lg shadow-md bg-white">
+          <div class="flex flex-row space-x-2 items-center">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Sản Phẩm Gợi Ý</mat-label>
+              <input type="text" matInput [(ngModel)]="SelectCombo" [ngModelOptions]="{standalone: true}"
+                [matAutocomplete]="autoCombo" (input)="applyFilter($event)">
+              <mat-autocomplete #autoCombo="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let item of filterCombos" [value]="item" (click)="ChoosenCombo(item)">
+                  <div class="flex flex-row space-x-2 items-center">
+                    <img [src]="GetImage(item.Hinhanh)" class="h-10">
+                    <span>{{item.Tieude}}</span>
+                  </div>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="flex flex-row space-x-2 justify-between" *ngFor="let item of Detail.Combo; let i = index">
+            <div class="flex flex-row space-x-2">
+              <img [src]="GetImage(item.Hinhanh)" class="h-10">
+              <div>{{item.Tieude}}</div>
+            </div>
+            <div (click)="RemoveCombo(item)"><span class="material-symbols-outlined">
+                do_not_disturb_on
+              </span></div>
+          </div>
+        </div>
+
+        <div class="col-span-2 flex flex-col w-full space-y-2">
+          <div>
+            <button mat-raised-button (click)="AddGroups()">Thêm Combo</button>
+          </div>
+        <div class="grid grid-cols-2 gap-4 w-full">
+          <div class="p-4 rounded-lg shadow-md bg-white" *ngFor="let item of Detail.Groups;let i = index">
+          <div class="flex flex-col space-y-2 items-center"> 
+            <div class="flex flex-row space-x-2 items-center justify-between w-full">
+             <div>#{{i+1}}</div>
+            <mat-form-field appearance="outline" class="w-full text-sm">
+                <mat-label>Tiêu Đề</mat-label>
+                <input type="text" [(ngModel)]="Detail.Groups[i].Title" [ngModelOptions]="{standalone: true}"
+                 matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+                  [placeholder]="'Tiêu Đề'"/>
+           </mat-form-field> 
+           <app-hinhanh class="" [Hinhanh]="Detail.Groups[i].Hinhanh" (UploadEmit)="GetUpload($event,i)"></app-hinhanh>
+              <div (click)="RemoveGroups(item,i)"><span class="material-symbols-outlined">
+                do_not_disturb_on
+              </span></div>
+            </div> 
+              <!-- <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Combo Sản Phẩm</mat-label>
+                <input type="text" matInput [(ngModel)]="SelectGroup" [ngModelOptions]="{standalone: true}"
+                  [matAutocomplete]="autoGroup" (input)="applyFilter($event)">
+                <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let item of filterGroups[i]" [value]="item" (click)="ChoosenGroupsSanpham(item,i)">
+                    <div class="flex flex-row space-x-2 items-center">
+                      <img [src]="GetImage(item.Hinhanh)" class="h-10">
+                      <span>{{item.Tieude}}</span>
+                    </div>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field> -->
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Liên Kết</mat-label>
+                <input type="text" matInput [(ngModel)]="Detail.Groups[i].Lienket" [ngModelOptions]="{standalone: true}"
+                class="w-full px-3 py-2 border border-gray-200 rounded"
+                  [placeholder]="'Liên Kết'"/>
+              </mat-form-field>  
+
+
+              <!-- <div class="flex flex-row space-x-2 w-full justify-between" *ngFor="let item1 of item.Sanpham; let j = index">
+                <div class="flex flex-row space-x-2 w-full">
+                  <img [src]="GetImage(item1.Hinhanh)" class="h-10">
+                  <span>{{item1.Tieude}}</span>
+                </div>
+                <div (click)="RemoveGroupsSanpham(item1,i)"><span class="material-symbols-outlined">
+                    do_not_disturb_on
+                  </span></div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+      <div class="justify-center">
+        <button mat-raised-button (click)="AddDieukien()">Thêm Điều Kiện</button>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4" *ngFor="let Dieukien of Detail.Dieukien;let index = index">
+        <div class="flex flex-col space-y-4 p-4 rounded-lg shadow-md bg-white">
+            <span class="font-bold">Điều Kiện Thông Tin {{index+1}}</span>
+  
+            <div class="flex flex-col space-y-2" *ngFor="let item of Thongtins;let i = index">
+              <span class="font-bold">{{item.Cauhoi}}</span>
+              <div (click)="AddDieukienThongtin(Dieukien,index,item,item1,i)" class="flex flex-row space-x-2 items-center" *ngFor="let item1 of item.Dapan">
+                <span class="material-symbols-outlined">{{CheckThongtin(Dieukien,index,item,item1,i)==true?'radio_button_checked':'radio_button_unchecked'}}</span>
+                  <span [innerHTML]="item1.value"></span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="flex flex-col space-y-4 p-4 rounded-lg shadow-md bg-white">
+          <span class="font-bold">Điều Kiện Phân Loại {{index+1}}</span>
+          <div class="flex flex-col space-y-2" *ngFor="let item of Phanloais;let i = index">
+            <span class="font-bold">  {{item?.Nhom?.Title}}</span>
+            <div (click)="AddDieukienPhanloai(Dieukien,index,item,item1,i)" class="flex flex-row space-x-2 items-center" *ngFor="let item1 of item.Nhom.Dieukien">
+              <span class="material-symbols-outlined">{{CheckPhanloai(Dieukien,item,item1,i)==true?'radio_button_checked':'radio_button_unchecked'}}</span>
+              <span>{{item1.Title}}</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="flex flex-col space-y-2 p-4 rounded-lg shadow-md bg-white">
+          <div class="flex flex-row justify-between">
+            <span class="font-bold">Điều Kiện Tình Trạng {{index+1}}</span>
+            <span class="material-symbols-outlined text-red-500" (click)="RemoveDieukien(index)">do_not_disturb_on</span>
+          </div>
+            <span class="font-bold">{{Tinhtrang[index]?.Nhom?.Title}}</span>
+            <div class="flex flex-col space-y-2" *ngFor="let item1 of Tinhtrang[index]?.children;let i = index">
+              <span class="font-bold">  {{item1.Cauhoi}}</span>
+              <div  (click)="AddDieukienTrangthai(Dieukien,index,item1,item2,i)" class="flex flex-row space-x-2 items-center" *ngFor="let item2 of item1.Dapan">              
+                <span class="material-symbols-outlined">{{CheckTinhtrang(Dieukien,item1,item2,i)==true?'radio_button_checked':'radio_button_unchecked'}}</span>
+                <span [innerHTML]="item2.value"></span>
+              </div>
+            </div>
+        </div>    
+      </div>
+
+
+    </div>
+
+
+  </div>

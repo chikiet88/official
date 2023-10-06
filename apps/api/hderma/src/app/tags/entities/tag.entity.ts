@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { ProductEntity } from '../../product/entities/product.entity';
 import { BaivietEntity } from '../../baiviet/entities/baiviet.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma-tags', {
   database:environment.DB_HDERMA.database,
     orderBy: {

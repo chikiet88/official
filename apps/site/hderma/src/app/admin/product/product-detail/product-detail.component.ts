@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import tinymce from 'tinymce';
 import { DanhmucProductService } from '../../danhmuc-product/danhmuc-product.service';
 import { TagsService } from '../../tags/tags.service';
 import { ProductService } from '../product.service';
-import { environment } from '@taza-base/environments';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'tazagroup-product-detail',
+  selector: 'taza-base-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
 })
@@ -31,11 +32,11 @@ export class ProductDetailComponent {
     private _DanhmucService: DanhmucProductService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private _tagService: TagsService
+    private _tagService: TagsService,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.APITINYMCE = environment.APITINYMCE;
   }
-
   configTiny: EditorComponent['init'] = {
     plugins: 'lists link image table code help wordcount media save',
     toolbar:
@@ -50,10 +51,8 @@ export class ProductDetailComponent {
 
     images_upload_handler: (blobInfo: any) => {
       const file = blobInfo.blob();
-      const formData = new FormData();
-      formData.append('file', file);
       const promise = new Promise<string>((resolve, reject) => {
-        this._productService.uploadDriver(formData).subscribe((res) => {
+        this._productService.uploadDriver(file).subscribe((res) => {
           if (res) {
             resolve(`https://drive.google.com/uc?id=${res.idDrive}`);
           }
@@ -64,7 +63,7 @@ export class ProductDetailComponent {
     entity_encoding: 'raw',
     file_picker_types: 'image media',
     file_picker_callback: function (cb, value, meta: any) {
-      if (meta.filetype == 'media') {
+      if (meta.filetype == 'media') {        
         const input: any = document.createElement('input');
         input.setAttribute('type', 'file');
         input.setAttribute('accept', 'image/*');
@@ -172,9 +171,6 @@ export class ProductDetailComponent {
   }
 
   updateSanpham() {
-    console.log(this.product);
-    console.log(this.product);
-
     const Tags = this.tagsLoaiSpData.concat(this.tagsTinhtrangData);
     this.product.Tags = Tags;
     this._productService.updateProduct(this.product).subscribe((res) => {

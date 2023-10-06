@@ -46,7 +46,6 @@ export class ChiendichChitietComponent implements OnInit {
 
   }
   onValueChange(state: string) {
-    console.log(state);
     this.filteredSanphams = this.Sanphams.filter(v => v.Tieude.toLowerCase().includes(state));
   }
   displayFn(data: any): string {

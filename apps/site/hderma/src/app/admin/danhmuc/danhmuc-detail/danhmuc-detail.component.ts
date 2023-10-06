@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DanhmucService } from '../../../shared/danhmuc.service';
 
 @Component({
-  selector: 'tazagroup-danhmuc-detail',
+  selector: 'taza-base-danhmuc-detail',
   templateUrl: './danhmuc-detail.component.html',
   styleUrls: ['./danhmuc-detail.component.scss'],
 })

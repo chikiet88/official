@@ -1,6 +1,5 @@
 {
   "name": "site-hderma",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/site/hderma/src",
   "prefix": "taza-base",
@@ -9,7 +8,13 @@
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/site/hderma",
+        "allowedCommonJsDependencies": [
+          "crypto-js",
+          "moment",
+          "aos",
+          "file-saver"
+        ],
+        "outputPath": "dist/browser",
         "index": "apps/site/hderma/src/index.html",
         "main": "apps/site/hderma/src/main.ts",
         "polyfills": "apps/site/hderma/src/polyfills.ts",
@@ -17,36 +22,50 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/site/hderma/src/favicon.ico",
-          "apps/site/hderma/src/assets"
+          "apps/site/hderma/src/assets",
+          "apps/site/hderma/src/robots.txt",
+          "apps/site/hderma/src/sitemap.xml",
+          "apps/site/hderma/src/sitemap_baiviet.xml",
+          "apps/site/hderma/src/sitemap_root.xml",
+          "apps/site/hderma/src/sitemap_sanpham.xml",
+          "apps/site/hderma/src/manifest.webmanifest",
+          "apps/site/hderma/src/firebase-messaging-sw.js"
         ],
-        "styles": ["apps/site/hderma/src/styles.scss"],
-        "scripts": []
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/site/hderma/src/styles.scss",
+          "./node_modules/ngx-spinner/animations/ball-spin-clockwise.css",
+          "./node_modules/ngx-spinner/animations/ball-clip-rotate-multiple.css"
+        ],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/site/hderma/ngsw-config.json"
       },
       "configurations": {
         "production": {
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "5mb",
+              "maximumError": "10mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumWarning": "200kb",
+              "maximumError": "400kb"
             }
           ],
           "fileReplacements": [
             {
-              "replace": "apps/site/hderma/src/environments/environment.ts",
-              "with": "apps/site/hderma/src/environments/environment.prod.ts"
+              "replace": "apps/site/hderma/src/environments/environments.ts",
+              "with": "apps/site/hderma/src/environments/environments.prod.ts"
             }
           ],
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
-          "optimization": false,
+          "buildOptimizer": true,
+          "optimization": true,
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
@@ -89,6 +108,63 @@
         "jestConfig": "apps/site/hderma/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/server",
+        "main": "apps/site/hderma/server.ts",
+        "tsConfig": "apps/site/hderma/tsconfig.server.json"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/site/hderma/src/environments/environments.ts",
+              "with": "apps/site/hderma/src/environments/environments.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "site-hderma:build:development",
+          "serverTarget": "site-hderma:server:development"
+        },
+        "production": {
+          "browserTarget": "site-hderma:build:production",
+          "serverTarget": "site-hderma:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "site-hderma:build:development",
+          "serverTarget": "site-hderma:server:development"
+        },
+        "production": {
+          "browserTarget": "site-hderma:build:production",
+          "serverTarget": "site-hderma:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

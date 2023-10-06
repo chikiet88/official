@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap, take } from 'rxjs';
-import { environment } from '@taza-base/environments';
-
+import { environment } from 'apps/site/hderma/src/environments/environments';
 
 @Injectable({
   providedIn: 'root'

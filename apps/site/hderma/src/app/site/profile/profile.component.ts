@@ -4,15 +4,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { CheckoutService } from '../checkout/checkout.service';
-import { DangkyService } from '../dangky/dangky.service';
+import { DangkyService } from '../../admin/dangky/dangky.service';
 import { WishlistService } from '../wishlist/wishlist.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { UsersService } from '../../shared/users.service';
 import { AuthService } from '../../admin/auth/auth.service';
+import { LocalStorageService } from '../../shared/localstorage.service';
 
 @Component({
-  selector: 'tazagroup-profile',
+  selector: 'taza-base-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   temp!: number
   profileForm!: any;
   passwordForm!: any;
-  token = localStorage.getItem('TazagroupToken') || null;
+  token = this._LocalStorageService.getItem('TazagroupToken') || null;
   isLogin = false;
   donhang: any[] = [];
   donhangchitiet: any[] = [];
@@ -38,6 +39,15 @@ export class ProfileComponent implements OnInit {
   oneStar: number = 0
   isOpened:boolean = true
   mode:any = 'side'
+  Menus:any[]=[
+    {id:1,Title:"Thông Tin Tài Khoản",Slug:'account',odering:1},
+    {id:2,Title:"Đơn Hàng",Slug:'donhang',odering:2},
+    {id:3,Title:"Tích Điểm",Slug:'tichdiem',odering:3},
+    {id:4,Title:"Giới Thiệu",Slug:'referral',odering:4},
+    {id:5,Title:"Chiến Dịch",Slug:'chiendich',odering:5},
+    {id:6,Title:"Admin",Slug:'/admin',odering:6},
+  ]
+  Menu:any={}
   constructor(
     private _dangkyService: DangkyService,
     private _activatedRoute: ActivatedRoute,
@@ -48,6 +58,7 @@ export class ProfileComponent implements OnInit {
     private _authService: AuthService,
     private _usersService: UsersService,
     private breakpointObserver: BreakpointObserver,
+    private _LocalStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -92,6 +103,10 @@ export class ProfileComponent implements OnInit {
         this._wishlistService.getWishlistDetail(res.Wishlist.id).subscribe()
       }
     })
+  }
+  GoToPage(item:any)
+  {
+    console.log(item); 
   }
   selectDonhang(item: any) {
     this.donhangchitiet = item.Donhangchitiets;

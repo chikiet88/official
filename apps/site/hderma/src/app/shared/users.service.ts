@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import {
   BehaviorSubject,
   Observable,
@@ -74,8 +74,6 @@ export class UsersService {
     );
   }
   updateOneUser(dulieu: any): Observable<any> {
-    console.log(dulieu);
-
     return this._httpClient.patch(`${this.APIURL}/hderma_users/${dulieu.id}`, dulieu).pipe(
       map((user:any) => {
         this._profile.next(user);
@@ -83,14 +81,14 @@ export class UsersService {
     )
   }
 changepass(data:any): Observable<any> {
-     return this._httpClient.post(`${environment.APIURL}/hderma_auth/changepass`, data).pipe(
+     return this._httpClient.post(`${this.APIURL}/hderma_auth/changepass`, data).pipe(
         tap((response: any) => {
                 return response;
         })
     );
 }
 Randompass(data:any): Observable<any> {
-  return this._httpClient.post(`${environment.APIURL}/hderma_auth/randompass`, data).pipe(
+  return this._httpClient.post(`${this.APIURL}/hderma_auth/randompass`, data).pipe(
      tap((response: any) => {
              return response;
      })

@@ -2,14 +2,14 @@
 // import { MatTabChangeEvent } from '@angular/material/tabs';
 // import { DomSanitizer } from '@angular/platform-browser';
 // import { ActivatedRoute, Router } from '@angular/router';
-// import { environment } from '@taza-base/environments';
+// import { environment } from 'apps/site/hderma/src/environments/environments';
 // import { EditorComponent } from '@tinymce/tinymce-angular';
 // import { NotifierService } from 'angular-notifier';
 // import { DanhmucProductService } from '../../danhmuc-product/danhmuc-product.service';
 // import { TagsService } from '../../tags/tags.service';
 // import { SanphamService } from '../sanpham.service';
 // @Component({
-//   selector: 'tazagroup-detailsanpham',
+//   selector: 'taza-base-detailsanpham',
 //   templateUrl: './detailsanpham.component.html',
 //   styleUrls: ['./detailsanpham.component.scss'],
 // })

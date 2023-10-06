@@ -76,8 +76,7 @@ export class DanhmucComponent implements OnInit {
     clickupdate() {
         this.danhmuc.forEach((x: any) => {
     
-          this._danhmucService.postDanhmuc(x).subscribe(res => console.log(res)
-          )
+          this._danhmucService.postDanhmuc(x).subscribe()
     
         })
         // let a:any[] = this.baiviet.filter((x:any) => x.pid == '9ce23cc8-3e11-4bb1-bee9-2c9931a5e48e')

@@ -12,12 +12,10 @@ import { TichdiemComponent } from './tichdiem/tichdiem.component';
 import { AccountComponent } from './account/account.component';
 import { ReferralComponent } from './referral/referral.component';
 import { ChiendichComponent } from './chiendich/chiendich.component';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { ChiendichService } from '../../admin/cauhinh/chiendich/chiendich.service';
 import { CustomerchiendichService } from './chiendich/chiendich.service';
 import { DoimatkhauComponent } from './doimatkhau/doimatkhau.component';
-import { DiachiComponent } from '../../shared/diachi/diachi.component';
-
+import { DiachiModule } from '../../shared/common/diachi/diachi.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,8 +25,9 @@ import { DiachiComponent } from '../../shared/diachi/diachi.component';
     ReactiveFormsModule,
     SwiperModule,
     EditorModule,
-    GooglePlaceModule,
+    DiachiModule,
     RouterModule.forChild([
+      {path:'',redirectTo:'account',pathMatch:'full'},
       {
         path: '',
         component: ProfileComponent,
@@ -50,10 +49,10 @@ import { DiachiComponent } from '../../shared/diachi/diachi.component';
           {
             path: 'account',
             component: AccountComponent,
-            children:[{
-              path:'diachi',
-              component:DiachiComponent
-          }]
+          //   children:[{
+          //     path:'diachi',
+          //     component:DiachiComponent
+          // }]
           },
           {
             path: 'referral',
@@ -75,7 +74,6 @@ import { DiachiComponent } from '../../shared/diachi/diachi.component';
     ReferralComponent,
     ChiendichComponent,
     DoimatkhauComponent,
-    DiachiComponent,
     DonhangComponent
   ],
   providers: [ChiendichService, CustomerchiendichService],

@@ -9,7 +9,7 @@
 // import { DanhmucProductService } from '../danhmuc-product/danhmuc-product.service';
 // import { SanphamService } from './sanpham.service';
 // @Component({
-//   selector: 'tazagroup-sanpham',
+//   selector: 'taza-base-sanpham',
 //   templateUrl: './sanpham.component.html',
 //   styleUrls: ['./sanpham.component.scss'],
 // })

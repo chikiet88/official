@@ -12,7 +12,7 @@ import {
 import { TagsService } from './tags.service';
 
 @Component({
-  selector: 'tazagroup-tags',
+  selector: 'taza-base-tags',
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss'],
 })

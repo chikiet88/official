@@ -10,7 +10,7 @@ import { UsersService } from '../../../shared/users.service';
 
 
 @Component({
-  selector: 'tazagroup-tichdiem',
+  selector: 'taza-base-tichdiem',
   templateUrl: './tichdiem.component.html',
   styleUrls: ['./tichdiem.component.scss'],
 })
@@ -55,7 +55,6 @@ export class TichdiemComponent implements OnInit {
     this._usersService.profile$.subscribe((data) => {
       if(data)
       {
-        console.log(data);
         this._tichdiemService.getTichdiem(data.id).subscribe((data)=>
         {
           if(data){
@@ -65,8 +64,6 @@ export class TichdiemComponent implements OnInit {
             this.dataSource = new MatTableDataSource(data.ChiTiet);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
-            console.log(this.Nextlevel);
-            console.log(data);
           }
         })
 

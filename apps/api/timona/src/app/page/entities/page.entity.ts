@@ -1,5 +1,5 @@
 import {Entity,Column,PrimaryGeneratedColumn,CreateDateColumn} from 'typeorm';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('page', {database:environment.DB_TIMONA.database, orderBy: { Ngaytao: 'DESC' } })
 export class PageEntity {
     @PrimaryGeneratedColumn('uuid')

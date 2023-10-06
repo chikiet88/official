@@ -11,7 +11,7 @@ import { TagsService } from '../tags/tags.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'tazagroup-product',
+  selector: 'taza-base-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
@@ -111,7 +111,6 @@ export class ProductComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
   onUpdate() {
-    console.log('ss');
   }
   onDelete() {
     this._productService
@@ -174,7 +173,6 @@ export class ProductComponent implements OnInit {
     this._productService.getProduct().subscribe();
     this._productService.products$.subscribe((res) => {
       if (res) {
-        console.log(res);
         this.products = res;
         this.products = this.products.filter((x: any) => !x.sort)
         this.products?.sort((a: any, b: any) => {

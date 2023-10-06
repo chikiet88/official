@@ -4,11 +4,12 @@ import { NotifierService } from 'angular-notifier';
 import { BaivietComponent } from '../baiviet.component';
 import { BaivietService } from '../../../shared/baiviet.service';
 import { EditorComponent } from '@tinymce/tinymce-angular';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { GetImage } from '../../../shared/shared.utils';
 import { UsersService } from '../../../shared/users.service';
+import { Baiviet } from '../baiviet.types';
 @Component({
-  selector: 'tazagroup-baiviet-chitiet',
+  selector: 'taza-base-baiviet-chitiet',
   templateUrl: './baiviet-chitiet.component.html',
   styleUrls: ['./baiviet-chitiet.component.scss'],
 })
@@ -20,8 +21,12 @@ export class BaivietChitietComponent implements OnInit {
       hinhchinh: {spath: '' }
     }
   }
+  SeoTool:any={}
   Danhmucs:any[]=[]
+  
   APITINYMCE = environment.APITINYMCE;
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,14 +41,13 @@ export class BaivietChitietComponent implements OnInit {
     this._BaivietService.danhmucs$.subscribe((data:any)=>this.Danhmucs = data)
     this.route.params.subscribe((paramsId) => {
       const id = paramsId['id'];
-      console.log(id);
       if (id) {
         this._BaivietComponent.drawer.open();
         this._BaivietService.getBaivietById(id).subscribe();
         this._BaivietService.baiviet$.subscribe((res) => {
           if (res) {
-            console.log(res);
             this.Detail = res;
+            console.log(res);
           }
           else {
             this.CloseDrawer()
@@ -61,6 +65,7 @@ export class BaivietChitietComponent implements OnInit {
     autoresize_min_height: 50,
     height: "200",
     deprecation_warnings: false,
+    statusbar:false,
     plugins: [
       'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor',
       'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -90,6 +95,7 @@ export class BaivietChitietComponent implements OnInit {
     autoresize_bottom_margin: 20,
     autoresize_min_height: 50,
     deprecation_warnings: false,
+    statusbar:false,
     plugins: [
       'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor',
       'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -142,7 +148,6 @@ export class BaivietChitietComponent implements OnInit {
         }
       });
     })
-
   }
   GetImage(data: any) {
     return GetImage(data);

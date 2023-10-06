@@ -1,14 +1,16 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { map, Observable } from 'rxjs';
 import { ListCauhinh } from './cauhinh';
+import { isPlatformBrowser } from '@angular/common';
+import { LocalStorageService } from '../../shared/localstorage.service';
 
  @Component({
-  selector: 'tazagroup-cauhinh',
+  selector: 'taza-base-cauhinh',
   templateUrl: './cauhinh.component.html',
   styleUrls: ['./cauhinh.component.scss'],
 })
@@ -21,12 +23,16 @@ export class CauhinhComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   drawerMode: MatDrawerMode = 'side';
   Opened: boolean = true;
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private _LocalStorageService: LocalStorageService,
+    @Inject(PLATFORM_ID) private platformId: object
+    ) {
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(result => {
       this.drawerMode = result.matches ? 'over' : 'side';
       this.Opened = result.matches ? false : true;
-    });
-    const StoreListCauhinh = localStorage.getItem('ListCauhinh')
+    });    
+   const StoreListCauhinh = _LocalStorageService.getItem('ListCauhinh')
     if(StoreListCauhinh!=null) {
       this.ListCauhinh = JSON.parse(StoreListCauhinh)
     }
@@ -44,7 +50,7 @@ export class CauhinhComponent implements AfterViewInit {
   AddCauhinh(data: any) {
     this.ListCauhinh.push(data);
     this.Cauhinh = {}
-    localStorage.setItem('ListCauhinh',JSON.stringify(this.ListCauhinh));
+    this._LocalStorageService.setItem('ListCauhinh',JSON.stringify(this.ListCauhinh));
     this.dataSource = new MatTableDataSource(this.ListCauhinh);
   }
   applyFilter(event: Event) {

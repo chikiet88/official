@@ -1,4 +1,4 @@
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, Index, CreateDateColumn, Generated, ManyToOne, OneToMany, Tree, TreeChildren, TreeParent } from 'typeorm';
 @Entity('hderma_cauhinh_chiendich', {database:environment.DB_HDERMA.database,
     orderBy: { Ngaytao: "DESC" }

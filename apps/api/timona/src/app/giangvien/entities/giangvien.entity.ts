@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { DanhmucEntity } from '../../danhmuc/entities/danhmuc.entity';
 import { SubcommentEntity } from '../../subcomment/entities/subcomment.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 
 @Entity('giangvien', {database:environment.DB_TIMONA.database, orderBy: { CreateAt: 'DESC' } })
 export class GiangvienEntity {

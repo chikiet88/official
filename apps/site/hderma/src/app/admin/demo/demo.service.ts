@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,6 @@ export class DemoService {
       switchMap(datas => this._httpClient.post<any>(`${this.APIURL}/demos`, dulieu).pipe(
         map((res: any) => {
           this._demos.next([res, ...datas]);
-          console.log(res);
           return res[1];
         })
       ))

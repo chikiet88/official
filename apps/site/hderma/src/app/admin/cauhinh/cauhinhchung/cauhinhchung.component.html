@@ -77,14 +77,21 @@
             <textarea rows="5" matInput [(ngModel)]="Detail.Mota" [ngModelOptions]="{standalone: true}" placeholder="Mô Tả">
             </textarea>
             </mat-form-field>
+            <editor [apiKey]="APITINYMCE" [(ngModel)]="Detail.Content" [ngModelOptions]="{standalone: true}"
+            [init]="configTiny"></editor>
             <mat-form-field appearance="outline" class="w-full">
             <mat-label>Dữ Liệu</mat-label>
             <textarea rows="5" matInput [(ngModel)]="Detail.Content" [ngModelOptions]="{standalone: true}" placeholder="Mô Tả">
             </textarea>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Công Ty</mat-label>
-              <input matInput [(ngModel)]="Detail.slug" [ngModelOptions]="{standalone: true}" placeholder="Slug">
+                <mat-label>Công Ty</mat-label>
+                <mat-select [(ngModel)]="Detail.Branch" [ngModelOptions]="{standalone: true}">
+                  <mat-option value="hderma">Hderma</mat-option>
+                  <mat-option value="taza-base">Taza-base</mat-option>
+                  <mat-option value="timona">Timona Academy</mat-option>
+                  <mat-option value="tazaskin">Tazaskin Clininc</mat-option>
+                </mat-select>
               </mat-form-field>        
             </div>
     </div>

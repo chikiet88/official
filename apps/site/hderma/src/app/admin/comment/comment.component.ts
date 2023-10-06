@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { CommentService } from './comment.service';
 
 @Component({
-  selector: 'tazagroup-comment',
+  selector: 'taza-base-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss'],
 })

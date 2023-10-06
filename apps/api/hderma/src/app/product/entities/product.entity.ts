@@ -13,7 +13,7 @@ import { DanhmucProductEntity } from '../../danhmuc-product/entities/danhmuc-pro
 import { DonhangchitietEntity } from '../../donhangchitiet/entities/donhangchitiet.entity';
 import { TagEntity } from '../../tags/entities/tag.entity';
 import { WishlistEntity } from '../../wishlist/entities/wishlist.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('hderma-product', {
   database:environment.DB_HDERMA.database,
   orderBy: {

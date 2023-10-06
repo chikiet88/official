@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule, UrlMatchResult, UrlSegment } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
-import { DangkyComponent } from './site/dangky/dangky.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DangnhapComponent } from './site/dangnhap/dangnhap.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 import { AccountNotificationsComponent } from './admin/account-notifications/account-notifications.component';
 import { TimkiemComponent } from './site/timkiem/timkiem.component';
-import { SendercodeComponent } from './site/dangky/sendercode/sendercode.component';
 import { TracuudonComponent } from './site/tracuudon/tracuudon.component';
-import { UsersComponent } from './admin/users/users.component';
-import { UsersDetailComponent } from './admin/users/users-detail/users-detail.component';
 import { UsersInterceptor } from './shared/users.interceptor';
 import { AuthModule } from './admin/auth/auth.module';
 import { AuthService } from './admin/auth/auth.service';
 import { AdminGuard } from './admin/auth/guards/admin.guard';
 import { GuestGuard } from './admin/auth/guards/guest.guard';
 import { MaterialModule } from './shared/material.module';
+import { SendercodeComponent } from './admin/dangky/sendercode/sendercode.component';
+import { DangkyComponent } from './admin/dangky/dangky.component';
+import { DangnhapComponent } from './admin/dangnhap/dangnhap.component';
+import { AuthGuard } from './admin/auth/guards/auth.guard';
 @NgModule({
   imports: [
     CommonModule,
@@ -73,13 +72,13 @@ import { MaterialModule } from './shared/material.module';
     NoopAnimationsModule,
     RouterModule.forChild([
       {
-        path: 'site',
+        path: '',
         loadChildren: () =>
           import('./site/main/main.module').then((m) => m.MainModule),
       },
       {
-        path: '',
-        canActivate: [AdminGuard],
+        path: 'admin',
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./admin/main/main.module').then((m) => m.MainModule),
       },
@@ -114,8 +113,6 @@ import { MaterialModule } from './shared/material.module';
     TimkiemComponent,
     SendercodeComponent,
     TracuudonComponent,
-    UsersComponent,
-    UsersDetailComponent
   ],
 })
-export class Hdermav2SiteModule {}
+export class Hdermav2SiteModule { }

@@ -26,7 +26,7 @@ import { TichdiemService } from '../tichdiem/tichdiem.service';
 import { ApinhanhService } from '../../shared/apinhanh.service';
 import { TTDonhang } from '../../shared/shared-datatype';
 @Component({
-  selector: 'tazagroup-donhang',
+  selector: 'taza-base-donhang',
   templateUrl: './donhang.component.html',
   styleUrls: ['./donhang.component.scss'],
 })
@@ -103,10 +103,7 @@ export class DonhangComponent implements OnInit {
      businessId:"151467"
     }
     this._ApinhanhService.getSanpham(dulieu).subscribe((data)=>
-    {
-      console.log(data);
-      
-    })
+    {})
     this._sanphamService.getProduct().subscribe();
     this._sanphamService.products$.subscribe(
       (res: any) => (this.products = res)
@@ -144,10 +141,7 @@ export class DonhangComponent implements OnInit {
       this._notifierService.notify('success','Cập Nhật Thành Công')
     });
   }
-  selectTrangthai(item: any, trangthai:number) {
-    console.log(item);
-    console.log(trangthai);
-    
+  selectTrangthai(item: any, trangthai:number) {   
     if(trangthai==3)
     {
       this.customer_diem.idUser = item.idKH

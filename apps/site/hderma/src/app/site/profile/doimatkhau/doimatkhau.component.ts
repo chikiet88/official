@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-doimatkhau',
+  selector: 'taza-base-doimatkhau',
   templateUrl: './doimatkhau.component.html',
   styleUrls: ['./doimatkhau.component.scss'],
 })

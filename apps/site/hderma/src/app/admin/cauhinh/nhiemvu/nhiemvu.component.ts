@@ -3,8 +3,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ListCauhinh } from '../cauhinh';
+import { LocalStorageService } from '../../../shared/localstorage.service';
 @Component({
-  selector: 'tazagroup-nhiemvu',
+  selector: 'taza-base-nhiemvu',
   templateUrl: './nhiemvu.component.html',
   styleUrls: ['./nhiemvu.component.scss'],
 })
@@ -16,8 +17,10 @@ export class NhiemvuComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    const StoreListCauhinh = localStorage.getItem('ListCauhinh')
+  constructor(
+    private _LocalStorageService:LocalStorageService
+  ) {
+    const StoreListCauhinh = _LocalStorageService.getItem('ListCauhinh')
     if(StoreListCauhinh!=null) {
       this.ListCauhinh = JSON.parse(StoreListCauhinh)
     }
@@ -25,7 +28,6 @@ export class NhiemvuComponent implements AfterViewInit {
 
   }
   ngOnInit(): void {
-    console.log(this.ListCauhinh);
     this.dataSource = new MatTableDataSource(this.ListCauhinh);
   }
   ngAfterViewInit() {
@@ -36,7 +38,7 @@ export class NhiemvuComponent implements AfterViewInit {
   AddCauhinh(data: any) {
     this.ListCauhinh.push(data);
     this.Cauhinh = {}
-    localStorage.setItem('ListCauhinh',JSON.stringify(this.ListCauhinh));
+    this._LocalStorageService.setItem('ListCauhinh',JSON.stringify(this.ListCauhinh));
     this.dataSource = new MatTableDataSource(this.ListCauhinh);
   }
   applyFilter(event: Event) {

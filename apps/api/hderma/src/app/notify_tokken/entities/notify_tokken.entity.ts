@@ -1,4 +1,4 @@
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 @Entity('hderma_notify', {database:environment.DB_HDERMA.database, orderBy: { Ngaytao: 'DESC' } })
 export class NotifyTokkenEntity {

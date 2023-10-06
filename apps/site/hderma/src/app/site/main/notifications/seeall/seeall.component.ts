@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-seeall',
+  selector: 'taza-base-seeall',
   templateUrl: './seeall.component.html',
   styleUrls: ['./seeall.component.scss'],
 })

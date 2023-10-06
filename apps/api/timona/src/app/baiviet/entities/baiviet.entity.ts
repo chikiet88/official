@@ -11,7 +11,7 @@ import {
     OneToMany,
 } from 'typeorm';
 import { DanhmucEntity } from '../../danhmuc/entities/danhmuc.entity';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 
 @Entity('baiviet', {database:environment.DB_TIMONA.database, orderBy: { CreateAt: 'DESC' } })
 export class BaivietEntity {

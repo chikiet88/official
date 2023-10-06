@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-timkiem',
+  selector: 'taza-base-timkiem',
   templateUrl: './timkiem.component.html',
   styleUrls: ['./timkiem.component.scss'],
 })

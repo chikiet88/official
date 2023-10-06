@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, Index, CreateDateColumn, Generated, ManyToOne, OneToMany, Tree, TreeChildren, TreeParent } from 'typeorm';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('Tickets', {database:environment.DB_TIMONA.database, orderBy: { Ngaytao: 'DESC' } })
 export class TicketEntity {
     @PrimaryGeneratedColumn('uuid')

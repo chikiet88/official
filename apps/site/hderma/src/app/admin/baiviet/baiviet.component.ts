@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { NotifierService } from 'angular-notifier';
 import { DanhmucService } from '../../shared/danhmuc.service';
 import { BaivietService } from '../../shared/baiviet.service';
@@ -10,7 +10,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { GetImage, nest } from '../../shared/shared.utils';
 @Component({
-  selector: 'tazagroup-baiviet',
+  selector: 'taza-base-baiviet',
   templateUrl: './baiviet.component.html',
   styleUrls: ['./baiviet.component.scss'],
 })
@@ -63,7 +63,13 @@ export class BaivietComponent implements OnInit {
         this.danhmuc = data
         this.danhmuc.forEach((v)=>v.Loai = 0)
         this._baivietService.baiviets$.subscribe(res => {
+          console.log(res);
           if (res) {
+            console.log(res);
+            // res.forEach(v => {
+            //     v.idDM = v.pid
+            //     this._baivietService.updateBaiviet(v).subscribe();
+            // });
             res.forEach(v=>v.isDM=false)
             this.baiviet = res
            // this.theme1 = this.baiviet.filter((x: any) => x.Theme == 4)
@@ -116,9 +122,14 @@ export class BaivietComponent implements OnInit {
       // }
     });
   }
-  CreateDM(data:any)
-  {
-    this._danhmucService.postDanhmuc(data).subscribe((data)=>this._Notification.notify("success","Thêm Thành Công"));
+  CreateDialog(teamplate: TemplateRef<any>): void {
+    const dialogRef = this.dialog.open(teamplate, {
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result=="true") {
+        this._danhmucService.postDanhmuc(this.DMDetail).subscribe((data)=>this._Notification.notify("success","Thêm Thành Công"));
+      }
+    });
   }
   CreateBaiviet(data:any)
   {

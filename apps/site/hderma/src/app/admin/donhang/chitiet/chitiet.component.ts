@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TTDonhang } from '../../../shared/shared-datatype';
 
 @Component({
-  selector: 'tazagroup-chitiet',
+  selector: 'taza-base-chitiet',
   templateUrl: './chitiet.component.html',
   styleUrls: ['./chitiet.component.scss'],
 })

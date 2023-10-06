@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { Role } from '../dto/create-user.dto';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 @Entity('timona-users',{database:environment.DB_TIMONA.database, orderBy: { Ngaytao: 'DESC' } })
 export class UsersEntity {
     @PrimaryGeneratedColumn("uuid")

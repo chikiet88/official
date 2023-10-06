@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DonhangService } from '../../admin/donhang/donhang.service';
 
 @Component({
-  selector: 'tazagroup-tracuudon',
+  selector: 'taza-base-tracuudon',
   templateUrl: './tracuudon.component.html',
   styleUrls: ['./tracuudon.component.scss'],
 })
@@ -11,7 +11,7 @@ export class TracuudonComponent implements OnInit {
   constructor(
     private _donhangService:DonhangService,
     ) {
-      this._donhangService.getDonhangbyMDH('DHd050614f').subscribe((data)=>console.log(data));
+      this._donhangService.getDonhangbyMDH('DHd050614f').subscribe();
   }
 
   ngOnInit(): void {}

@@ -24,7 +24,6 @@ export class KhachhangComponent implements OnInit {
   }
   ngOnInit(): void {
     this._UsersService.getUsers().subscribe((data)=>{
-      console.log(data);
       this.FilterUsers = this.Users = data
     })
   }

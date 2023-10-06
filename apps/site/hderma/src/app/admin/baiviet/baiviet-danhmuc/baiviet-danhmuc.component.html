@@ -30,6 +30,12 @@
         </ng-template>
       </div>
       <div class="flex flex-col space-y-2 w-full">
+        <mat-form-field appearance="outline">
+          <mat-label>Danh Mục</mat-label>
+          <mat-select [(ngModel)]="Detail.pid" [ngModelOptions]="{standalone: true}">
+            <mat-option [value]="item.id" *ngFor="let item of Danhmucs">{{item.Title}}</mat-option>
+          </mat-select>
+        </mat-form-field>
         <mat-form-field appearance="outline" class="flex w-full">
           <mat-label>Tiêu đề</mat-label>
           <input matInput [(ngModel)]="Detail.Title" [ngModelOptions]="{standalone: true}" type="text"

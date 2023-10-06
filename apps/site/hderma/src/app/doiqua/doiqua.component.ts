@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tazagroup-doiqua',
+  selector: 'taza-base-doiqua',
   templateUrl: './doiqua.component.html',
   styleUrls: ['./doiqua.component.scss'],
 })

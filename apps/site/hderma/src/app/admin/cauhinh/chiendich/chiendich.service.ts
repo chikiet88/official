@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@taza-base/environments';
+import { environment } from 'apps/site/hderma/src/environments/environments';
 import { BehaviorSubject, Observable, tap, take, switchMap, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,6 @@ export class ChiendichService {
     return this._httpClient.get<any>(`${this.APIURL}/hderma-cauhinh-chiendich/${id}`).pipe(
       tap((response: any) => {
         this._chiendich.next(response);
-        console.log(response);
       })
     );
   }

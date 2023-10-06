@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { NotifierService } from 'angular-notifier';
 import { mergeMapTo } from 'rxjs';
 import { AccountNotificationsService } from './account-notifications.service';
 import { UsersService } from '../../shared/users.service';
+import { isPlatformBrowser } from '@angular/common';
 declare var Notification: any;
 @Component({
-  selector: 'tazagroup-account-notifications',
+  selector: 'taza-base-account-notifications',
   templateUrl: './account-notifications.component.html',
   styleUrls: ['./account-notifications.component.scss'],
 })
@@ -22,12 +23,22 @@ export class AccountNotificationsComponent implements OnInit {
     private _usersService: UsersService,
     private _notifierService: NotifierService,
     private _accountNotificationsService: AccountNotificationsService,
+    @Inject(PLATFORM_ID) private platformId: object
     ) {
-      window.addEventListener('beforeinstallprompt', (event: any) => {
-        event.preventDefault();
-        this.deferredPrompt = event;
-        console.log(this.deferredPrompt);
-      });
+      if (isPlatformBrowser(this.platformId)) {
+        window.addEventListener('beforeinstallprompt', (event: any) => {
+          event.preventDefault();
+          this.deferredPrompt = event;
+        });
+        }
+        else
+        {
+          window.addEventListener('beforeinstallprompt', (event: any) => {
+            event.preventDefault();
+            this.deferredPrompt = event;
+          });
+        }
+      
     }
 
   ngOnInit(): void {
@@ -46,7 +57,6 @@ export class AccountNotificationsComponent implements OnInit {
       this.isPermission =  false
     } else {
       Notification.requestPermission()
-      console.log('Chưa CHọn');
       }
   }
   showInstallPrompt() {
@@ -70,20 +80,16 @@ export class AccountNotificationsComponent implements OnInit {
       this.ngOnInit
     } else {
       Notification.requestPermission()
-      console.log('Chưa CHọn');
       }
   }
   ActiveNoti()
   {
-    console.log(Notification.permission);
     if (Notification.permission === 'granted') {
       this.messaging.requestPermission.pipe(
         mergeMapTo(this.messaging.tokenChanges)
       )
       .subscribe((token:any) => {
 
-        console.log(token);
-        console.log(this.User.fcmToken.includes(token));
         if (!this.User.fcmToken.includes(token)) {
           this.User.fcmToken.push(token);
           this._usersService.updateOneUser(this.User).subscribe((data)=>
