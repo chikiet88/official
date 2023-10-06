@@ -1,98 +1,27 @@
-## Angular
-npm install -D @nrwl/angular
-yarn add -W @angular/material && yarn nx g @angular/material:ng-add
-npm install -D tailwindcss --force
-npm install -D postcss -force
+# Frontend
 
-## Nestjs
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.5.
 
-## Run Remote
-"start": "node dist/main.js",
+## Development server
 
-## Git CLI
-git remote prune origin "Đồng Bộ Nhánh Trên máy Chủ"
-git push origin --delete  xóa nhánh remote
-git branch -D xóa nhánh local
-## Workspace CLI
-npx nx g @nrwl/workspace:remove hrm
-npx nx run-many --target=serve --projects=app1,app2 --parallel
-npx nx run-many --target=build --projects=app1,app2 --parallel
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-### Buid
-npx nx build app1 --prod --outputHashing=all
+## Code scaffolding
 
-## Github Action
-git branch gh-pages
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-git checkout gh-pages
+## Build
 
-git push origin gh-pages
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-npx ng add angular-cli-ghpages
+## Running unit tests
 
-npx ng deploy --base-href=https://quocbao1983.github.io/demo/
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-npx ng build --prod --base-href https://quocbao1983.github.io/demo/
+## Running end-to-end tests
 
-npx ng add angular-cli-ghpages --project site
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-npx ngh --dir=dist/apps/site  --no-silent
+## Further help
 
-git config --global user.email "quocbao280783@gmail.com"
-
-git config --global user.name "quocbao1983"
-
-npx nx build --prod --outputHashing=all
-
-### Docker BackEnd End
-#### create and add to .dockerignore
-Dockerfile
-
-.dockerignore
-
-node_modules
- 
-npm-debug.log
-#### create and add to Dockerfile
-
-FROM node:18
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install --force
-
-COPY . .
-
-RUN npm run build
-
-CMD [ "node", "dist/apps/api/main.js" ]
-
-docker build -t demoapi .
-
-After Deploy Get Link API and repalce APIURL
-### Docker Front End
-#### create and add to .dockerignore
-Dockerfile
-
-.dockerignore
-
-node_modules
- 
-npm-debug.log
-#### create and add to Dockerfile
-
-FROM nginx:1.17.1-alpine
-
-COPY /dist/apps/site /usr/share/nginx/html
-
-COPY nginx.conf /etc/nginx/conf.d/
-
-EXPOSE 4200
-
-docker build -t demosite .
-
-docker build -t anhsonsite .
-docker tag anhsonsite gcr.io/alert-rush-279906/anhsonsite
-docker push gcr.io/alert-rush-279906/anhsonsite
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
