@@ -1,0 +1,64 @@
+<div class="!flex flex-col flex-auto min-w-0 relative bg-white">
+  <div class="relative border-b-2 flex flex-row justify-between items-center p-3">
+    <span class="material-icons p-2 hover:bg-gray-200 rounded-full" (click)="CloseDrawer()">
+      arrow_back
+    </span>
+    <div class="w-1/2 flex flex-row space-x-4">
+    <mat-form-field appearance="outline">
+        <mat-label>Nhóm</mat-label>
+        <mat-select [(ngModel)]="Detail.Nhom" [ngModelOptions]="{standalone: true}">
+          <mat-option [value]="item.id" *ngFor="let item of Nhomroutine">{{item.Title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Câu Hỏi</mat-label>
+        <input [(ngModel)]="Detail.Cauhoi" [ngModelOptions]="{standalone: true}" matInput type="text" class="w-full"
+          placeholder="Câu Hỏi" />
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="Update(Detail)">Cập Nhật</button>
+    </div>
+  </div>
+  <div class="relative w-full flex flex-col space-y-2 justify-between p-4">
+    <div class="grid lg:grid-cols-2 lg:gap-4 gap-2 grid-cols-1">
+      <div class="h-[60vh] overflow-auto col-span-2 space-y-2">
+        <div class="{{item.correct?'border-2 border-blue-500':'border border-dashed'}} p-4 grid grid-cols-1 gap-2"
+          *ngFor="let item of Detail.Dapan;let i = index">
+          <div class="col-span-2 flex flex-row space-x-2 justify-between items-center">
+            <div class="flex flex-row space-x-2 items-center {{item.correct?'font-bold':''}}" (click)="CheckCorrect(item)">
+              <span>Đáp Án {{i+1}}</span>
+              <span class="material-symbols-outlined text-blue-500" *ngIf="item.correct">
+                check_circle
+              </span>
+              <mat-form-field appearance="outline" class="max-w-[100px] text-xs">
+                <mat-label>Điểm</mat-label>
+                <input type="number" matInput [(ngModel)]="Detail.Dapan[i].Diem" [ngModelOptions]="{standalone: true}" 
+                  class="px-3 py-2 border border-gray-200 rounded"
+                  [placeholder]="'Điểm'"/>
+              </mat-form-field>
+            </div>
+            <span class="material-symbols-outlined text-red-500" (click)="RemoveDapan(item)">close</span>
+          </div>
+          <div class="col-span-2 flex flex-row space-x-2 justify-between items-center">
+            <div class="flex flex-col justify-center">
+              <span>Trả Lời</span>
+              <editor class="w-full" [apiKey]="APITINYMCE" [(ngModel)]="Detail.Dapan[i].value" [ngModelOptions]="{standalone: true}"
+              [init]="configTiny"></editor> 
+            </div>
+            <div class="flex flex-col justify-center">
+              <span>Mô Tả</span>
+              <editor class="w-full" [apiKey]="APITINYMCE" [(ngModel)]="Detail.Dapan[i].Mota" [ngModelOptions]="{standalone: true}"
+              [init]="configTiny"></editor>  
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button mat-stroked-button (click)="AddDapan()">Thêm Đáp Án</button>
+      </div>
+
+    </div>
+  </div>

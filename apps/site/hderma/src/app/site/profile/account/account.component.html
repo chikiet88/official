@@ -1,0 +1,66 @@
+<div class="flex md:flex-row md:space-x-2 flex-col w-full">
+  <div class="flex flex-col space-y-3 w-full p-16">
+    <div class="flex flex-row justify-between">
+    <div class="text-2xl text-blue-500 font-bold">Thông tin tài khoản</div>
+     <div><button mat-raised-button color="primary" (click)="UpdateProfile(user)">Cập Nhật</button></div> 
+  </div>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Họ Tên</mat-label>
+        <input matInput [(ngModel)]="user.Hoten" [ngModelOptions]="{standalone: true}" placeholder="Họ Tên">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+          <mat-label>Giới Tính</mat-label>
+          <mat-select [(ngModel)]="user.Gioitinh" [ngModelOptions]="{standalone: true}">
+            <mat-option [value]="'nam'">Nam</mat-option>
+            <mat-option [value]="'nu'">Nữ</mat-option>
+          </mat-select>
+        </mat-form-field>   
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Số Điện Thoại</mat-label>
+        <input matInput [(ngModel)]="user.SDT" [ngModelOptions]="{standalone: true}" placeholder="Số Điện Thoại">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" placeholder="Email">
+      </mat-form-field>
+      <div class="col-span-2 flex flex-row justify-between w-full py-y">
+        <app-diachi class="w-full" [isSingle]="false" [Diachis]="user.Diachi" (diachiEmit)="GetDiachi($event)"></app-diachi>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- <div class="w-full p-4">
+    <p class="text-2xl text-blue-500 font-bold">Thay đổi password</p>
+    <div class="flex flex-col pt-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Mật Khẩu Cũ</mat-label>
+        <input matInput type="password" autocomplete="current-password" [(ngModel)]="Data.oldpass"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Mật Khẩu Mới</mat-label>
+        <input matInput type="password" autocomplete="new-password" [(ngModel)]="Data.newpass"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nhập Lại Mật Khẩu Mới</mat-label>
+        <input matInput type="password" autocomplete="new-password" [(ngModel)]="Data.newpass2"
+          [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" (click)="ChangePass(Data)">Cập Nhật</button>
+      </div>
+    </div>
+  </div> -->
+</div>
+<ng-template #dialogTemplate>
+  <div mat-dialog-title>Xoá Địa Chỉ</div>
+  <div mat-dialog-content>
+    Bạn Có Chắc Chắn Muốn Xoá Địa Chỉ Này
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button color="warn" mat-dialog-close="false">Huỷ</button>
+    <button mat-button color="primary" mat-dialog-close="true">Đồng Ý</button>
+  </div>
+</ng-template>

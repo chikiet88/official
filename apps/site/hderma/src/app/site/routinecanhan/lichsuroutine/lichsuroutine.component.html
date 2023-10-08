@@ -1,0 +1,53 @@
+<div class="flex flex-col space-y-6 max-w-4xl m-auto p-4 bg-white">
+    <div class="text-2xl font-bold text-center">Lịch Sử Routine</div>
+   <ng-container *ngIf="Ketquas.length>0; else elseTemplate">       
+    <div class="flex flex-row space-x-2">
+        <div class="flex flex-col w-1/3 border rounded-lg">
+            <a [href]="['/lichsu-routine/'+item.id]" routerLinkActive="bg-gray-400" class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
+                *ngFor="let item of Ketquas; let i = index">
+                <div class="flex flex-row space-x-2 items-center justify-between w-full">
+                    <div class="flex flex-col space-y-2">
+                        <span>{{item.CreateAt|date:'hh:mm:ss dd/MM/yyyy'}} </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="w-full">
+            <router-outlet></router-outlet>
+        </div>
+    </div>  
+    </ng-container>
+    <ng-template #elseTemplate>
+        <div class="text-center">Chưa Có Routine <a class="text-red-500 font-bold" href="/routine-canhan/thongtin">Tạo Routine</a> </div>
+    </ng-template>
+
+
+</div>
+
+
+
+<!-- <mat-drawer-container class="flex flex-col space-y-6 max-w-4xl m-auto p-4 bg-white" autosize>
+    <div class="text-2xl font-bold">Lịch Sử Routine</div>
+    <mat-drawer #drawer [opened]="true" mode="side" class="!flex flex-col flex-auto min-w-0 relative h-full w-2/3"
+        position="end">
+        <div class="relative flex flex-col h-full w-full overflow-auto">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class="!flex flex-col flex-auto min-w-0 relative bg-white">
+        <div class="relative flex flex-col h-full w-full overflow-auto">
+            <div class="flex flex-col">
+                <div class="text-2xl font-bold text-center">Lịch Sử</div>
+                <div [routerLink]="[item.id]" routerLinkActive="router-link-active" (click)="drawer.open()"
+                    class="flex flex-row justify-between items-center p-4 hover:bg-gray-200"
+                    *ngFor="let item of Ketquas; let i = index">
+                    <div class="flex flex-row space-x-2 items-center justify-between w-full">
+                        <div class="flex flex-col space-y-2">
+                            <span>{{item.CreateAt|date:'hh:mm:ss dd/MM/yyyy'}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container> -->

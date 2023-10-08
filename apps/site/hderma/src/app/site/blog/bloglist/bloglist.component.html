@@ -1,0 +1,308 @@
+<div class="flex flex-col max-w-7xl m-auto">
+  <div class="flex flex-row">
+    <div class="flex flex-col space-y-4">
+      <mat-form-field appearance="outline" class="w-full text-sm">
+        <mat-label>Tìm Kiếm</mat-label>
+        <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+          [placeholder]="'Tìm kiếm'" (input)="applyFilter($event)" />
+        <span matPrefix class="material-icons mr-2">search</span>
+      </mat-form-field> 
+      <div>
+        <ul class="list-none">
+          <ng-container *ngFor="let item of Danhmucs">
+            <li>
+              <ng-container *ngIf="item.children.length>0; else elseTemplate">
+                <span class="font-semibold"> {{ item.Title }}</span>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <a [href]="'/blog/' + item.Slug" class="font-semibold">
+                  {{ item.Title }}
+                </a>
+              </ng-template>
+              <ul class="list-none ml-4"> <!-- Nested list starts here -->
+                <li *ngFor="let childItem of item.children">
+                  <a [href]="'blog/' + childItem.Slug" class="text-body hover-secondary">
+                    {{ childItem.Title }}
+                  </a>
+                </li>
+              </ul> <!-- Nested list ends here -->
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+
+    </div>
+    <div></div>
+  </div>
+</div>
+
+
+
+<section class="pt-5 pt-lg-10 pb-lg-13 pb-11">
+  <div class="container">
+    <!-- <h2 class="text-center mb-8">Blog Update</h2> -->
+    <div class="row">
+      <div class="col-lg-4 primary-sidebar sidebar-sticky pr-lg-8 order-lg-1 order-2" id="sidebar">
+        <div class="primary-sidebar-inner">
+          <div class="card border-0 mb-8">
+            <div class="card-header bg-transparent border-0 p-0">
+              <h3 class="card-title fs-20 mb-0">
+                Tìm Kiếm
+              </h3>
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+              <form class="mx-auto w-100">
+                <div class="input-group">
+                  <div class="input-group-prepend position-absolute z-index-10">
+                    <button class="btn border-0 bg-transparent text-secondary fs-20 px-4 lh-14" type="submit"
+                      id="button-addon1"><i class="far fa-search"></i></button>
+                  </div>
+                  <input type="text" (keyup)="applyFilter($event)" class="form-control border-0 pl-8 rounded"
+                    placeholder="Tìm Kiếm" aria-describedby="button-addon1">
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card border-0 mb-8">
+            <div class="card-header bg-transparent border-0 p-0">
+              <h3 class="card-title fs-20 mb-0">
+                Thể Loại
+              </h3>
+            </div>
+            <div class="card-body px-0 pt-2 pb-0">
+              <ul class="list-unstyled mb-0">
+                <li class="lh-2" *ngFor="let item of Danhmucs">
+                  <a [href]="['blog/'+item.Slug]" class="text-body hover-secondary">{{item.Title}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card border-0 mb-8">
+            <div class="card-header bg-transparent border-0 p-0">
+              <h3 class="card-title fs-20 mb-0">
+                Bài Viết Gần Đây
+              </h3>
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-4" *ngFor="let item of Soluong(Baiviets,0,4)">
+                  <div class="media align-items-center">
+                    <a [routerLink]="[item.Slug]" class="d-block w-60px mr-4">
+                      <ng-container *ngIf="item.Hinhanh.hinhchinh; else elseTemplate">
+                        <img src="{{GetImage(item.Hinhanh.hinhchinh.spath)}}" />
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <img src="https://hderma.vn/assets/image/logo.svg" />
+                      </ng-template>
+                    </a>
+                    <div class="media-body">
+                      <!-- <p class="fs-13 text-uppercase letter-spacing-01 mb-1 font-weight-600">
+                           {{item.tag||'No tag'}}</p> -->
+                      <a class="font-weight-600 text-decoration-none" [routerLink]="[item.Slug]">{{item.Title}}</a>
+                    </div>
+                  </div>
+                </li>
+                <!-- <li class="mb-4">
+                    <div class="media align-items-center">
+                      <a href="#" class="d-block w-60px mr-4"><img
+                            src="assets/images/recent-post-01.jpg"
+                            alt="Sampson Totton"></a>
+                        <div class="media-body">
+                          <p class="fs-13 mb-0 text-uppercase letter-spacing-01 mb-1 font-weight-600">
+                            Skin care</p>
+                          <a class="font-weight-600 text-decoration-none" href="blog-detail-01.html">Why You Should Try an Overnight Balm </a>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="mb-4">
+                      <div class="media align-items-center">
+                        <a href="#" class="d-block w-60px mr-4"><img
+                            src="assets/images/recent-post-02.jpg"
+                            alt="Sampson Totton"></a>
+                          <div class="media-body">
+                            <p class="fs-13 mb-0 text-uppercase letter-spacing-01 mb-1 font-weight-600">
+                              Skin care</p>
+                            <a class="font-weight-600 text-decoration-none" href="blog-detail-01.html">How to Plop Hair for Bouncy, Beautiful Curls </a>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="mb-4">
+                        <div class="media align-items-center">
+                          <a href="#" class="d-block w-60px mr-4"><img
+                            src="assets/images/recent-post-03.jpg"
+                            alt="Sampson Totton"></a>
+                            <div class="media-body">
+                              <p class="fs-13 mb-0 text-uppercase letter-spacing-01 mb-1 font-weight-600">
+                                tips</p>
+                              <a class="font-weight-600 text-decoration-none" href="blog-detail-01.html">Which foundation formula is right for your skin? </a>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="mb-0">
+                          <div class="media align-items-center">
+                            <a href="#" class="d-block w-60px mr-4"><img
+                            src="assets/images/recent-post-04.jpg"
+                            alt="Sampson Totton"></a>
+                              <div class="media-body">
+                                <p class="fs-13 mb-0 text-uppercase letter-spacing-01 mb-1 font-weight-600">
+                                  Skin care</p>
+                                <a class="font-weight-600 text-decoration-none" href="blog-detail-01.html">A User-Friendly Guide to Natural Cleansers </a>
+                              </div>
+                            </div>
+                          </li> -->
+              </ul>
+            </div>
+          </div>
+          <div class="card border-0 mb-8 hover-shine banner banner-05">
+            <div class="card-img bg-img-cover-center"
+              style="background-image: url('assets/trangchu/sidebar-blog-01.jpg');"></div>
+            <div class="card-img-overlay d-inline-flex flex-column px-7 px-xl-10 pt-5 pb-4 text-center z-index-3">
+              <!-- <h3 class="card-title fs-30 lh-12 text-white text-uppercase">Be your kind of beauty</h3> -->
+              <div class="mt-auto">
+                <a [routerLink]="['/san-pham']"
+                  class="fs-16 font-weight-600 btn text-secondary hover-white bg-white bg-hover-secondary shadow-1">Về
+                  Cửa hàng</a>
+              </div>
+            </div>
+          </div>
+          <div class="card border-0 widget-instagram">
+            <div class="card-header bg-transparent border-0 p-0 d-flex justify-content-between">
+              <h3 class="card-title fs-20 mb-0">
+                Facebook
+              </h3>
+              <a href="https://www.facebook.com/hdermavietnam" class="text-primary text-uppercase mb-0">@HDERMA</a>
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+              <div class="row mx-n1">
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-01.jpg" alt="Instagram">
+                  </a>
+                </div>
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-02.jpg" alt="Instagram">
+                  </a>
+                </div>
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-03.jpg" alt="Instagram">
+                  </a>
+                </div>
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-04.jpg" alt="Instagram">
+                  </a>
+                </div>
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-05.jpg" alt="Instagram">
+                  </a>
+                </div>
+                <div class="col-6 col-md-4 item p-1">
+                  <a href="#" class="d-block">
+                    <img src="assets/trangchu/instagram-06.jpg" alt="Instagram">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mb-11 mb-lg-0 order-lg-1">
+        <ul class="list-unstyled d-lg-none d-block">
+          <li class="lh-2" *ngFor="let item of Danhmucs" (click)="ChoosenDanhmuc(item)">
+            <span class="text-body hover-secondary">{{item.Title}}</span>
+          </li>
+        </ul>
+        <ng-container *ngIf="totalItems>0; else elseTemplate">
+          <div class="card border-0 mb-7" *ngFor="let item of PagiBaiviets">
+            <div class="row no-gutters align-items-center">
+              <div class="col-md-6 pr-md-6">
+                <a [routerLink]="[item.Slug]" class="hover-shine d-block">
+                  <ng-container *ngIf="item.Hinhanh.hinhchinh; else elseTemplate">
+                    <img src="{{GetImage(item.Hinhanh.hinhchinh.spath)}}" />
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <img src="https://hderma.vn/assets/image/logo.svg" />
+                  </ng-template>
+                  <!-- <img src="assets/images/post-36.jpg"
+                                   alt="Which foundation formula is right for your skin?"> -->
+                </a>
+              </div>
+              <div class="col-md-6">
+                <div class="card-body px-0 py-lg-0">
+                  <ul class="list-inline fs-13 text-uppercase letter-spacing-01 lh-1 font-weight-600">
+                    <!-- <li class="list-inline-item pr-3 border-right border-2x"> {{item.tag||'No tag'}}</li> -->
+                    <li class="list-inline-item pr-3">{{item.CreateAt|date:'dd/MM/yyyy'}}</li>
+                  </ul>
+                  <h3 class="card-title mb-2 fs-20">
+                    <a [routerLink]="[item.Slug]">{{item.Title}}</a>
+                  </h3>
+                  <p class="card-text mb-4" [innerHTML]="item.Mota"></p>
+                  <a [routerLink]="[item.Slug]"
+                    class="fs-16 font-weight-600 border-bottom d-inline-block border-hover-primary text-decoration-none">
+                    Xem Thêm
+                    <svg class="icon icon-arrow-right">
+                      <use xlink:href="#icon-arrow-right"></use>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center" style="font-size: 19px;">
+                <li class="page-item"><a href="bai-viet?page=1" class="page-link"><span class="material-icons">first_page</span></a></li>
+                <li class="page-item"><a class="page-link" href="bai-viet?page={{currentPage-1}}"><span class="material-icons">navigate_before</span></a></li>
+                <li (click)="pageChanged(item)" class="page-item {{item==currentPage?'active':''}} {{item>totalPages?'d-none':''}}" *ngFor="let item of listPage" ><a class="page-link" href="bai-viet?page={{item}}"><span>{{item}}</span></a></li>
+                <li class="page-item"><a class="page-link {{currentPage==totalPages?'d-none':''}}" href="bai-viet?page={{currentPage+1}}"><span class="material-icons px-2">navigate_next</span></a></li>
+                <li class="page-item"><a class="page-link {{currentPage==totalPages?'d-none':''}}" href="bai-viet?page={{totalPages}}"><span class="material-icons">last_page</span></a></li>
+              </ul>
+            </nav>
+          </div> -->
+          <div class="flex flex-row justify-center my-4">
+            <nav aria-label="Page navigation example">
+              <ul class="flex items-center -space-x-px h-10 text-base">
+                <li>
+                  <a href="san-pham?page=1"
+                    class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="material-icons">first_page</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="san-pham?page={{currentPage-1}}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="material-icons">navigate_before</span>
+                  </a>
+                </li>
+                <li class="page-item {{item>totalPages?'hidden':''}}" (click)="pageChanged(item)" *ngFor="let item of listPage">
+                  <a href="san-pham?page={{item}}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight {{item==currentPage?'text-blue-600 bg-blue-50':'text-gray-500 bg-white'}} border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    {{item}}
+                  </a>
+                </li>
+                <li>
+                  <a href="san-pham?page={{currentPage+1}}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="material-icons">navigate_next</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="san-pham?page={{totalPages}}"
+                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <span class="material-icons">last_page</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          Không tìm thấy dữ liệu
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>

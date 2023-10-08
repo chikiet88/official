@@ -1,0 +1,100 @@
+<mat-drawer-container class="max-w-7xl m-auto h-full min-h-screen" autosize>
+  <mat-drawer #drawer [opened]="Opened" [mode]="drawerMode" class="!flex flex-col flex-auto border-0 min-w-0 relative h-full lg:w-1/4 w-2/3"
+    position="start">
+    <div class="relative flex flex-col space-y-3 h-full w-full overflow-auto lg:p-8 p-2">
+        <div class="hidden lg:flex">
+          <mat-form-field appearance="outline" class="w-full text-sm">
+            <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+              [placeholder]="'Tìm kiếm'" (input)="applyFilter($event)" />
+            <span matPrefix class="material-icons mr-2">search</span>
+          </mat-form-field> 
+        </div>
+        <div>
+          <ul class="list-none space-y-2">
+            <ng-container *ngFor="let item of Danhmucs">
+              <li>
+                <ng-container *ngIf="item.children.length>0; else elseTemplate">
+                  <span class="font-semibold "> {{ item.Title }}</span>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <a [href]="'/blog/' + item.Slug" class="font-semibold">
+                    {{ item.Title }}
+                  </a>
+                </ng-template>
+                <ul class="list-none mt-2 ml-4 space-y-2">
+                  <li *ngFor="let childItem of item.children">
+                    <a [href]="'blog/' + childItem.Slug" class="text-body hover-secondary">
+                      {{ childItem.Title }}
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+        <div class="relative">
+          <img src="https://hderma.vn/assets/trangchu/sidebar-blog-01.jpg" alt="">
+          <div class="absolute pb-3 mx-auto mt-2 left-0 right-0 top-0 bottom-0 text-white flex items-end justify-center">
+            <a href="san-pham"><button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">VÀO CỬA HÀNG</button></a>   
+          </div>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <div class="flex flex-row justify-between">
+            <span>FACEBOOK</span>
+            <a href="https://www.facebook.com/hdermavietnam">
+              @HDERMA
+            </a>
+          </div>
+          <div class="grid grid-cols-3">
+            <img src="https://hderma.vn/assets/trangchu/instagram-01.jpg" alt="">
+            <img src="https://hderma.vn/assets/trangchu/instagram-02.jpg" alt="">
+            <img src="https://hderma.vn/assets/trangchu/instagram-03.jpg" alt="">
+            <img src="https://hderma.vn/assets/trangchu/instagram-04.jpg" alt="">
+            <img src="https://hderma.vn/assets/trangchu/instagram-05.jpg" alt="">
+            <img src="https://hderma.vn/assets/trangchu/instagram-06.jpg" alt="">
+          </div>
+        </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="!flex flex-col flex-auto min-w-0 relative bg-white">
+    <div class="lg:p-8 p-2 flex flex-col space-y-8 w-full items-center">
+      <div class="lg:hidden flex flex-row justify-between space-x-4 w-full items-center">
+        <button mat-icon-button><span class="material-symbols-outlined text-4xl" (click)="drawer.toggle()">list</span></button>
+        <mat-form-field appearance="outline" class="w-full text-sm">
+          <input type="text" matInput class="w-full px-3 py-2 border border-gray-200 rounded"
+            [placeholder]="'Tìm kiếm'" (input)="applyFilter($event)" />
+          <span matPrefix class="material-icons mr-2">search</span>
+        </mat-form-field> 
+      </div>
+      <div class="grid lg:grid-cols-3 grid-cols-1 lg:gap-8 gap-0 lg:space-y-0 space-y-3" *ngFor="let item of PagiBaiviets">
+        <img [src]="GetImage(item?.Hinhanh?.hinhchinh?.spath)">
+        <div class="col-span-2 flex flex-col space-y-2 justify-center">
+            <div class="font-semibold">{{item.CreateAt|date:'dd/MM/yyyy'}}</div>
+            <a class="font-semibold text-lg" [href]="['/bai-viet/'+item.Slug]">{{item.Title}}</a>
+            <div class="line-clamp-3" [innerHTML]="item.Mota"></div>
+            <a class="font-semibold text-lg" [href]="['/bai-viet/'+item.Slug]">
+                <span class="border-b hover:border-b-2 hover:border-black"> Xem Thêm </span>
+            </a>
+        </div>
+      </div> 
+      <div class="flex flex-row justify-center px-3 space-x-2 my-4 w-full" *ngIf="totalItems>=itemsPerPage">
+        <a mat-stroked-button class="!min-w-[30px] !leading-8" href="blog/{{Danhmuc?.Slug}}?page=1">
+          <span class="material-icons">first_page</span>
+        </a>
+        <a mat-stroked-button class="!min-w-[30px] leading-8" href="blog/{{Danhmuc?.Slug}}?page={{currentPage-1}}">
+          <span class="material-icons">navigate_before</span>
+        </a>
+          <a mat-stroked-button class="!min-w-[30px] leading-8" class="{{item>totalPages?'hidden':''}} {{item==currentPage?'text-white bg-black':'text-gray-500 bg-white'}}" (click)="pageChanged(item)" *ngFor="let item of listPage">
+            {{item}}
+          </a>
+        <a mat-stroked-button class="!min-w-[30px] leading-8" href="blog/{{Danhmuc?.Slug}}?page={{currentPage+1}}">
+          <span class="material-icons">navigate_next</span>
+        </a>
+        <a mat-stroked-button class="!min-w-[30px] leading-8" href="blog/{{Danhmuc?.Slug}}?page={{totalPages}}">
+          <span class="material-icons">last_page</span>
+        </a>
+    </div>
+
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
