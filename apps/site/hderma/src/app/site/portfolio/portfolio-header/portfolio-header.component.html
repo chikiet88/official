@@ -1,0 +1,65 @@
+<div class="w-full {{isSticky?'fixed bg-[#1e1345] shadow-lg top-0 left-0 z-10':'relative'}}">
+<div class="container mx-auto flex flex-row w-full justify-between items-center text-white">
+    <img src="https://chikiet.com/assets/img/avatar.png" class="max-h-[80px] bg-white rounded-lg p-2 my-2" alt="Chí Kiệt">
+  <div class="flex flex-row space-x-2 p-2 items-center">
+    <ng-container *ngFor="let item of Menus">
+      <ng-container *ngIf="item.children!=null&&item.children.length>0; else elseTemplate">
+        <a class="header-link px-4 py-2 font-semibold uppercase transition-all" 
+        [matMenuTriggerFor]="beforeMenu" #menuTrigger="matMenuTrigger"
+        (mouseover)="menuTrigger.openMenu()">{{item.Title}}</a>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <span (mouseleave)="menuTrigger.closeMenu()" >
+          <a [href]="item1.value" routerLinkActive="!bg-black !text-white" mat-menu-item
+            *ngFor="let item1 of item.children">{{item1.Title}}
+          </a>
+        </span>
+        </mat-menu>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a class="header-link px-4 py-2 font-semibold uppercase transition-all" [href]="item.value">
+          <span>
+            {{item.Title}}
+          </span>
+        </a>
+      </ng-template>
+    </ng-container>
+    <!-- <div>
+      <a mat-button [matMenuTriggerFor]="aboveMenu" class="font-semibold uppercase">Trang Chủ</a>
+      <mat-menu #aboveMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="belowMenu" class="font-semibold uppercase">Về Tôi</button>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="beforeMenu" class="font-semibold uppercase">Dịch Vụ</button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="afterMenu" class="font-semibold uppercase">Sản Phẩm</button>
+      <mat-menu #afterMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="afterMenu" class="font-semibold uppercase">Nhật Ký</button>
+      <mat-menu #afterMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="afterMenu" class="font-semibold uppercase">Liên Hệ</button>
+      <mat-menu #afterMenu="matMenu" xPosition="after">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+    </div> -->
+      <a class="text-white 
+       bg-[#3474bb] 
+       rounded-full px-16 py-4 font-bold 
+       hover:bg-blue-600 
+       transition-all duration-300 ease" href="#contact"><span>Tải Xuống CV</span></a>
+  </div>
+</div>
+</div>

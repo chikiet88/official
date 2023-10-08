@@ -74,6 +74,11 @@ import { AuthGuard } from './admin/auth/guards/auth.guard';
       {
         path: '',
         loadChildren: () =>
+          import('./site/portfolio/portfolio.module').then((m) => m.PortfolioModule),
+      },
+      {
+        path: 'site',
+        loadChildren: () =>
           import('./site/main/main.module').then((m) => m.MainModule),
       },
       {
