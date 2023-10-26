@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 
-import * as AOS from 'aos';
+// import * as AOS from 'aos';
 @Component({
   selector: 'taza-base-vehderma',
   templateUrl: './vehderma.component.html',
@@ -22,6 +22,6 @@ export class VehdermaComponent implements OnInit {
     spaceBetween: 30,
   };
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
   }
 }
