@@ -17,12 +17,10 @@ export class PortfolioHeaderComponent implements OnInit {
   }
   isSticky:boolean=false
   Menus: any[] = [
-    { id: 1,value:'#trangchu', Title: 'Trang Chủ', Slug: '/' },
-    { id: 2,value:'#vetoi' ,Title: 'về Tôi', Slug: 'san-pham' },
-    { id: 2,value:'#dichvu', Title: 'Dịch Vụ', Slug: 'san-pham' },
+    { id: 1,value:'#', Title: 'Trang Chủ', Slug: '/' },
     { id: 2,value:'#sanpham', Title: 'Sản Phẩm', Slug: 'san-pham' },
-    { id: 2,value:'#nhatky', Title: 'Nhật Ký', Slug: 'san-pham' },
-    { id: 2,value:'#lienhe', Title: 'Liên Hệ', Slug: 'san-pham' },
+    { id: 3,value:'#chuyenmon' ,Title: 'Chuyên Môn', Slug: 'chuyen-mon' },
+    { id: 4,value:'#lienhe', Title: 'Liên Hệ', Slug: 'lien-he' },
     // {
     //   id: 4, Title: 'Góc Chia Sẻ', Slug: 'bai-viet',
     //   children: [

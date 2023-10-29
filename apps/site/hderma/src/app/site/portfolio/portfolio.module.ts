@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { PortfolioHeaderComponent } from './portfolio-header/portfolio-header.component';
+import { MaterialModule } from '../../shared/material.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +14,7 @@ import { PortfolioHeaderComponent } from './portfolio-header/portfolio-header.co
     ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
+    MaterialModule,
     RouterModule.forChild([
       {
         path: '', component: PortfolioComponent,

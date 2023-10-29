@@ -117,6 +117,7 @@
         "main": "apps/site/hderma/server.ts",
         "tsConfig": "apps/site/hderma/tsconfig.server.json"
       },
+      
       "configurations": {
         "production": {
           "outputHashing": "media",
