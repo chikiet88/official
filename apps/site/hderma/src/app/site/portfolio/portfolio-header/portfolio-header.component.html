@@ -1,6 +1,6 @@
 <div class="lg:flex hidden w-full {{isSticky?'fixed bg-[#1e1345] shadow-lg top-0 left-0 z-10':'relative'}}">
 <div class="container mx-auto flex flex-row w-full justify-between items-center text-white">
-    <img src="assets/logo.jpg" class="max-h-[60px] bg-white rounded-lg p-2 my-2" alt="Chí Kiệt">
+    <img src="assets/logo.jpg" class="max-h-[60px] bg-white rounded-lg my-2" alt="Chí Kiệt">
   <div class="flex flex-row space-x-2 p-2 items-center">
     <ng-container *ngFor="let item of Menus">
       <ng-container *ngIf="item.children!=null&&item.children.length>0; else elseTemplate">

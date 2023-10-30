@@ -9,9 +9,9 @@ declare var Notification: any;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Hderma - Công ty TNHH Dược Mỹ phẩm';
+  title = 'Phạm Chí Kiệt - Fullstack Developer';
   @HostListener('window:scroll', ['$event']) onWindowScroll(e:any) {
-    console.log(e.target['scrollingElement'].scrollTop)
+    // console.log(e.target['scrollingElement'].scrollTop)
   }
   constructor(
   private swUpdate: SwUpdate,
