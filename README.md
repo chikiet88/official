@@ -158,9 +158,9 @@ git push origin gh-pages
 
 npx ng add angular-cli-ghpages
 
-npx ng deploy --base-href=https://quocbao1983.github.io/demo/
+npx ng deploy --base-href=https://chikiet.com
 
-npx ng build --prod --base-href https://quocbao1983.github.io/demo/
+npx ng build --prod --base-href https://chikiet.com
 
 npx ng add angular-cli-ghpages --project site
 
