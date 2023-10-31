@@ -5,14 +5,15 @@ export const environment = {
   APIURL: "http://localhost:3333",
   SECRETKEY: "mycustomuselongsecret",
   EXPIRESIN: "60 days",
-  FirebaseInit:{
-    apiKey: "AIzaSyAuvMdAWsbDXzA6IoOIiuRhr8w6-VqN4gs",
-    authDomain: "hderma-e806b.firebaseapp.com",
-    projectId: "hderma-e806b",
-    storageBucket: "hderma-e806b.appspot.com",
-    messagingSenderId: "297498165872",
-    appId: "1:297498165872:web:2636d766b29bc99515eab5",
-    measurementId: "G-ZX7TQ6ZTTH"
+  FirebaseInit: {
+    apiKey: "AIzaSyBDJmHNhEfFHEX7omSY4mswmhL-aQExtQw",
+    authDomain: "chikiet-c210c.firebaseapp.com",
+    projectId: "chikiet-c210c",
+    storageBucket: "chikiet-c210c.appspot.com",
+    messagingSenderId: "314744065540",
+    databaseUrl :"https://chikiet-c210c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    appId: "1:314744065540:web:8a2c0a2c8eb1e455972f51",
+    measurementId: "G-NS7MFZ1DQ7"
   },
   VNPAY:{
     vnp_Amount:0,

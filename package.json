@@ -40,7 +40,7 @@
     "crypto-js": "^4.1.1",
     "domino": "^2.1.6",
     "dotenv": "^16.0.3",
-    "firebase": "^9.19.1",
+    "firebase": "^9.23.0",
     "google-charts": "^2.0.0",
     "googleapis": "^108.0.0",
     "localstorage-polyfill": "^1.0.1",
