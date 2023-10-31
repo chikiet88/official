@@ -166,6 +166,12 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "deploy": {
+      "executor": "angular-cli-ghpages:deploy",
+      "options": {
+        "baseHref": "https://chikiet88.com/"
+      }
     }
   },
   "tags": []
