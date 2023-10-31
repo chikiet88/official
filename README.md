@@ -129,9 +129,9 @@ npx nx g @nrwl/nest:class api/users/user.dto --project=shared
 
 
 ## Git CLI
-git remote prune origin "Đồng Bộ Nhánh Trên máy Chủ"
-git push origin --delete  xóa nhánh remote
-git branch -D xóa nhánh local
+git remote prune origin  "Đồng Bộ Nhánh Trên máy Chủ"
+git push origin gh-pages --delete  xóa nhánh remote
+git branch gh-pages -D  gh-pagesxóa nhánh local
 ## Workspace CLI
 npx nx g @nrwl/workspace:remove hrm
 npx nx run-many --target=serve --projects=apidaotaov2,daotaov2 --parallel
@@ -155,6 +155,8 @@ git branch gh-pages
 git checkout gh-pages
 
 git push origin gh-pages
+
+npx ng add angular-cli-ghpages
 
 npx ng add angular-cli-ghpages
 
